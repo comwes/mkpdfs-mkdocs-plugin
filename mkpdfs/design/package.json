@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "The default mkpdfs design to use when generating the pdf report. This style will only be used for the pdf, not to be included in the webversion as it can conflict with other themes.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass report.scss report.css"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,8 @@
   "devDependencies": {
     "material-design-color": "^2.3.2",
     "material-shadows": "^3.0.1",
-    "modularscale-sass": "^3.0.8"
+    "modularscale-sass": "^3.0.8",
+    "node-sass": "^4.11.0"
   },
   "author": {
     "name": "Comwes, Gerry Ntabuhashe",
