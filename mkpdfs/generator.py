@@ -1,0 +1,163 @@
+import os
+import sys
+from timeit import default_timer as timer
+
+from weasyprint import HTML,urls, CSS
+from bs4 import BeautifulSoup
+from mkpdfs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
+from weasyprint.fonts import FontConfiguration
+from mkpdfs.utils import gen_address
+
+class Generator(object):
+
+    def __init__(self):
+        self.config = None
+        self.design = None
+        self.mkdconfig = None
+        self.nav = None
+        self._articles = {}
+        self._page_order = []
+        self._base_urls = {}
+        self._toc = None
+        self.html = BeautifulSoup('<html><head></head><body></body></html>', 'html.parser')
+        self.dir = os.path.dirname(os.path.realpath(__file__))
+        self.design = os.path.join(self.dir, 'design/report.css')
+
+    def set_config(self, local, config):
+        self.config = local;
+        if self.config['report_design']:
+            css_file = os.path.join(os.getcwd(), self.config['report_design'])
+            if not os.path.isfile(css_file) :
+                sys.exit('The file {} specified for design has not been found.'.format(css_file))
+            self.design = css_file
+        self.title = config['site_name']
+        self.config['copyright'] = 'MIT' if not config['copyright'] else config['copyright']
+        self.mkdconfig = config
+
+    def write(self):
+        self.gen_articles()
+        font_config = FontConfiguration()
+        css = self.add_css(font_config);
+        pdf_path = os.path.join(self.mkdconfig['site_dir'], self.config['output_path'])
+        os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
+        html = HTML(string=str(self.html)).write_pdf(pdf_path, font_config=font_config)
+
+    def add_nav(self, nav):
+        self.nav = nav
+        for page in nav.pages:
+            self._page_order.append(page.file.url)
+
+
+    def add_article(self, content, page, base_url):
+        self._base_urls[page.file.url] = base_url
+        soup = BeautifulSoup(content, 'html.parser')
+        article = soup.find('article')
+        url = page.url.split('.')[0]
+        article = prep_combined(article, base_url, page.file.url)
+        article.attrs['id'] = 'mkpdf-{}'.format(url)
+        self._articles[page.file.url] = article
+        return self.get_path_to_pdf(page.file.dest_path)
+
+    def add_css(self, font_config):
+        css_url = urls.path2url(self.design)
+        self.html.head.clear()
+        css_tag = BeautifulSoup('<title>{}</title><link rel="stylesheet" href="{}" type="text/css">'.format(self.title, css_url), 'html5lib')
+        self.html.head.insert(0, css_tag)
+
+    def get_path_to_pdf(self, start):
+        pdf_split = os.path.split(self.config['output_path'])
+        start_dir = os.path.split(start)[0]
+        return os.path.join(os.path.relpath(pdf_split[0], start_dir), pdf_split[1])
+
+    def add_tocs(self):
+        soup = BeautifulSoup('<body></body>','html5lib')
+        title = soup.new_tag('h1', id='doc-title')
+        title.insert(0, self.config['toc_title'])
+        self._toc = soup.new_tag('article', id='contents')
+        self._toc.insert(0, title)
+        for n in self.nav:
+            h3 = soup.new_tag('h3')
+            h3.insert(0, n.title)
+            self._toc.append(h3)
+            if n.is_page :
+                ptoc = self._gen_toc_page(n.file.url, n.toc, soup)
+                self._toc.append(ptoc)
+            else :
+                self._gen_toc_section(n, soup)
+        self.html.body.append(self._toc)
+
+    def add_cover(self):
+        a = self.html.new_tag("article", id='doc-cover')
+        title = self.html.new_tag("h1", id='doc-title')
+        title.insert(0, self.title)
+        a.insert(0, title)
+        a.append(gen_address(self.config))
+        self.html.body.append(a)
+
+    def gen_articles (self):
+        self.add_cover()
+        self.add_tocs()
+        for url in self._page_order:
+            self.html.body.append(self._articles[url])
+
+    def get_path_to_pdf(self, start):
+        pdf_split = os.path.split(self.config['output_path'])
+        start_dir = os.path.split(start)[0]
+        return os.path.join(os.path.relpath(pdf_split[0], start_dir), pdf_split[1])
+
+    def _gen_toc_section(self, section, soup):
+        for p in section.children:
+            stoc = self._gen_toc_for_section(p.file.url, p, soup)
+            child = soup.new_tag('div')
+            child.append(stoc)
+            self._toc.append(child)
+
+    def _gen_children(self, url, children, soup):
+        ul = soup.new_tag('ul')
+        for child in children:
+            a = soup.new_tag('a', href=child.url)
+            a.insert(0, child.title)
+            li = soup.new_tag('li')
+            li.append(a)
+            if child.children :
+                sub = self._gen_children(url, child.children, soup)
+                li.append(sub)
+            ul.append(li)
+        return ul
+    def _gen_toc_for_section(self, url, p, soup):
+        div = soup.new_tag('div')
+        menu = soup.new_tag('div')
+        h4 = soup.new_tag('h4')
+        urlid = url.split('.')[0]
+        a = soup.new_tag('a', href='#mkpdf-{}'.format(urlid))
+        a.insert(0, p.title)
+        h4.append(a)
+        menu.append(h4)
+        ul = soup.new_tag('ul')
+        for child in p.toc.items:
+            a = soup.new_tag('a', href=child.url)
+            a.insert(0, child.title)
+            li = soup.new_tag('li')
+            li.append(a)
+            if child.title == p.title:
+                li = soup.new_tag('div');
+            if child.children :
+                sub = self._gen_children(url, child.children, soup)
+                li.append(sub)
+            ul.append(li)
+        if len(p.toc.items)>0:
+            menu.append(ul)
+        div.append(menu)
+        div = prep_combined(div, self._base_urls[url], url)
+        return div.find('div')
+
+    def _gen_toc_page(self, url, toc, soup):
+        div = soup.new_tag('div')
+        menu = soup.new_tag('div')
+        for item in toc.items:
+            if item.children :
+                child = self._gen_children(url, item.children, soup)
+                menu.append(child)
+        div.append(menu)
+        div = prep_combined(div, self._base_urls[url], url)
+        return div.find('div')

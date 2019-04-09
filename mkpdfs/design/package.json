@@ -1,0 +1,34 @@
+{
+  "name": "mkpdfs-design",
+  "version": "1.0.0",
+  "description": "The default mkpdfs design to use when generating the pdf report. This style will only be used for the pdf, not to be included in the webversion as it can conflict with other themes.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comwes/mkpdfs-mkdocs-plugin.git"
+  },
+  "keywords": [
+    "mkdocs",
+    "documentation",
+    "pdf",
+    "markdown",
+    "plugin"
+  ],
+  "devDependencies": {
+    "material-design-color": "^2.3.2",
+    "material-shadows": "^3.0.1",
+    "modularscale-sass": "^3.0.8"
+  },
+  "author": {
+    "name": "Comwes, Gerry Ntabuhashe",
+    "email": "contact@comwes.eu, gnt@comwes.eu",
+    "url": "https://comwes.eu, https://mkpdfs.comwes.eu"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/comwes/mkpdfs-mkdocs-plugin/issues"
+  },
+  "homepage": "https://github.com/comwes/mkpdfs-mkdocs-plugin#readme"
+}
