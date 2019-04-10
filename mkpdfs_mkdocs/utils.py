@@ -3,9 +3,14 @@ from bs4 import BeautifulSoup
 
 def modify_html(html: str, href: str) -> str:
     soup = BeautifulSoup(html, 'html.parser')
-    a = soup.new_tag('a', href=href, title='Télécharger', download=None)
-    a['class'] = 'md-icon md-content__icon'
-    a.string = '\uE2C4'
+    a = soup.new_tag('a', href=href, title='Download', download=None)
+    a['class'] = 'md-content__icon pdf-download-btn'
+    i = soup.new_tag('i')
+    i['class'] = 'fa fa-download'
+    small = soup.new_tag('small')
+    small.append(i)
+    small.append(' PDF')
+    a.append(small)
     soup.article.insert(0, a)
     return str(soup)
 
