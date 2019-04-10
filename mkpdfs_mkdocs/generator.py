@@ -4,9 +4,9 @@ from timeit import default_timer as timer
 
 from weasyprint import HTML,urls, CSS
 from bs4 import BeautifulSoup
-from mkpdfs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
+from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 from weasyprint.fonts import FontConfiguration
-from mkpdfs.utils import gen_address
+from mkpdfs_mkdocs.utils import gen_address
 
 class Generator(object):
 

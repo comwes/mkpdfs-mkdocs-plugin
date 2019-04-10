@@ -9,11 +9,10 @@ from mkdocs import utils
 
 from weasyprint import HTML,urls, CSS
 from bs4 import BeautifulSoup
-from mkpdfs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 from weasyprint.fonts import FontConfiguration
 
-from mkpdfs.generator import Generator
-from mkpdfs.utils import modify_html
+from mkpdfs_mkdocs.generator import Generator
+from mkpdfs_mkdocs.utils import modify_html
 
 class Mkpdfs(BasePlugin):
 
@@ -24,22 +23,8 @@ class Mkpdfs(BasePlugin):
         ('author', config_options.Type(utils.string_types, default="Undefined")),
         ('output_path', config_options.Type(utils.string_types, default="pdf/combined.pdf")),
     )
-    _site_dir = None
-    _articles = {}
-    _toc = None
-    _page_order = []
-    _base_urls = {}
-    nav = None
-    dir = None
-    design = None
 
     def __init__(self):
-        self.title = None
-        self.num_files = 0
-        self.total_time = 0
-        self.html = None
-        self.dir = os.path.dirname(os.path.realpath(__file__))
-        self.design = os.path.join(self.dir, 'design/report.css')
         self.generator = Generator()
 
     def on_serve (self, server, config ):
@@ -50,6 +35,7 @@ class Mkpdfs(BasePlugin):
         return server
 
     def on_config(self, config, **kwargs):
+        self.config['output_path'] = os.path.join("pdf", "combined.pdf") if not self.config['output_path'] else self.config['output_path']
         self.generator.set_config(self.config, config)
         return config
 

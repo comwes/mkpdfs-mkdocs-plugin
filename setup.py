@@ -9,11 +9,11 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 
 setup(
-    name='mkpdfs',
+    name='mkpdfs-mkdocs',
     version='1.0.0',
-    # packages=['mkpdfs'],
-    url='https://github.com/comwes/mkpdfs-mkdocs-plugin',
-    license='MIT',
+    url='https://mkpdfs.comwes.eu',
+    license='GPLv3',
+    license_file="LICENSE",
     author='Comwes, Ntabuhashe Gerard',
     author_email='contact@comwes.eu',
     description='Allows the generation of the PDF version of your MkDocs documentation.',
@@ -26,9 +26,8 @@ setup(
         'beautifulsoup4>=4.6.3'
     ],
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/pypa/sampleproject/issues',
-        'Funding': 'https://donate.pypi.org',
-        'Say Thanks!': 'http://saythanks.io/to/example',
+        'Bug Reports': 'https://github.com/comwes/mkpdfs-mkdocs-plugin/issues',
+        'Say Thanks!': 'http://saythanks.io/to/comwes',
         'Source': 'https://github.com/comwes/mkpdfs-mkdocs-plugin',
     },
     keywords='mkdocs documentation pdf export weasyprint markdown plugin',
@@ -53,7 +52,7 @@ setup(
 
     entry_points={
         'mkdocs.plugins': [
-            'mkpdfs = mkpdfs:Mkpdfs',
+            'mkpdfs = mkpdfs_mkdocs:Mkpdfs',
         ]
     },
     zip_safe=False,
