@@ -124,6 +124,7 @@ $bgTextColor: #fff;
   background: url(cover.jpg) no-repeat center;
   background-size: cover;
   margin: 0;
+  counter-reset: page -1;
 }
 
 
@@ -136,6 +137,7 @@ html {
     width: 100%;
   }
   body article#doc-cover {
+    break-after: right;
     align-content: space-between;
     display: flex;
     flex-wrap: wrap;
@@ -155,6 +157,10 @@ html {
       }
       &:first-of-type {
         padding-left: 3cm;
+      }
+      p{
+        margin: 0;
+        padding: 0;
       }
       p#copyright {
         string-set: copyright content();
