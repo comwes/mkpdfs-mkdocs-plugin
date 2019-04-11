@@ -76,16 +76,16 @@ This plugin support following options to allow you better handle the customisati
 
 ## Contributing
 
-From reporting a bug to submitting a pull request: every contribution is appreciated and welcome. Report bugs, ask questions and request features using [Github issues][github-issues].
-If you want to contribute to the code of this project, please read the [Contribution Guidelines][contributing].
+From reporting a bug to submitting a pull request, every contribution is appreciated and welcome. Report bugs, ask questions and request features using [Github issues][github-issues].
+
 
 ## Thanks to
 
 The idea of this plugin has raised while working on a project in the public sector. After many research I found some plugins that guided me to the current solution. They have inspired me a lot, so many thanks to:
 
-- [Terry Zhao][zhaoterryy] the author of the [MkDocs PDF Export Plugin][mkdocs-pdf-export-plugin] the source of our inspiration. We've used some of their code in this project.
+- [Terry Zhao][zhaoterryy] the author of the [MkDocs PDF Export Plugin][mkdocs-pdf-export-plugin] the source of our inspiration. We've used some of his code in this project.
 - [Kozea team][kozeateam] for bringing [WeasyPrint](https://github.com/Kozea/WeasyPrint) to us as an open source project. The default design of the generated PDF is based on their work [report Sample](https://github.com/Kozea/WeasyPrint/tree/gh-pages/samples/report).
-- [Martin Donath][squidfunk] the author of [Material for MkDocs][materialmkdoc], some of their css file were used to design the layout of Admonition, Codehilite, Arthmatex, emoji, and more.
+- [Martin Donath][squidfunk] the author of [Material for MkDocs][materialmkdoc], some of his css file were used to design the layout of Admonition, Codehilite, Arthmatex, emoji, and more.
 
 
 [weasyprint-linux]: https://weasyprint.readthedocs.io/en/latest/install.html#linux
