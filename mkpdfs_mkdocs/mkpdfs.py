@@ -17,10 +17,11 @@ from mkpdfs_mkdocs.utils import modify_html
 class Mkpdfs(BasePlugin):
 
     config_scheme = (
-        ('report_design', config_options.Type(utils.string_types, default=None)),
+        ('design', config_options.Type(utils.string_types, default=None)),
         ('toc_title', config_options.Type(utils.string_types, default="Table of Contents")),
-        ('company', config_options.Type(utils.string_types, default="Undefined")),
-        ('author', config_options.Type(utils.string_types, default="Undefined")),
+        ('company', config_options.Type(utils.string_types, default=None)),
+        ('author', config_options.Type(utils.string_types, default=None)),
+        ('toc_position', config_options.Type(utils.string_types, default="pre")),
         ('output_path', config_options.Type(utils.string_types, default="pdf/combined.pdf")),
     )
 

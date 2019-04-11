@@ -19,10 +19,13 @@ def gen_address (config):
     soup = BeautifulSoup('<body></body>','html5lib')
     address = soup.new_tag('address')
     p = soup.new_tag('p')
-    s = "{}\n{}\n".format(config['author'],config['company'])
-    p.append(s)
+    for line in [config['author'], config['company']]:
+        if line :
+            s = "{}\n".format(line)
+            p.append(s)
     address.append(p)
-    span = soup.new_tag('p', id="copyright")
-    span.append(config['copyright'])
-    address.append(span)
+    if config['copyright']:
+        span = soup.new_tag('p', id="copyright")
+        span.append(config['copyright'])
+        address.append(span)
     return address

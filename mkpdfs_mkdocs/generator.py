@@ -25,8 +25,8 @@ class Generator(object):
 
     def set_config(self, local, config):
         self.config = local;
-        if self.config['report_design']:
-            css_file = os.path.join(os.getcwd(), self.config['report_design'])
+        if self.config['design']:
+            css_file = os.path.join(os.getcwd(), self.config['design'])
             if not os.path.isfile(css_file) :
                 sys.exit('The file {} specified for design has not been found.'.format(css_file))
             self.design = css_file
@@ -41,6 +41,7 @@ class Generator(object):
         pdf_path = os.path.join(self.mkdconfig['site_dir'], self.config['output_path'])
         os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
         html = HTML(string=str(self.html)).write_pdf(pdf_path, font_config=font_config)
+        print("PDF version of the documentation generated.")
 
     def add_nav(self, nav):
         self.nav = nav
@@ -87,8 +88,8 @@ class Generator(object):
         self.html.body.append(self._toc)
 
     def add_cover(self):
-        a = self.html.new_tag("article", id='doc-cover')
-        title = self.html.new_tag("h1", id='doc-title')
+        a = self.html.new_tag('article', id='doc-cover')
+        title = self.html.new_tag('h1', id='doc-title')
         title.insert(0, self.title)
         a.insert(0, title)
         a.append(gen_address(self.config))
@@ -96,9 +97,12 @@ class Generator(object):
 
     def gen_articles (self):
         self.add_cover()
-        self.add_tocs()
+        if self.config['toc_position'] == 'pre' :
+            self.add_tocs()
         for url in self._page_order:
             self.html.body.append(self._articles[url])
+        if self.config['toc_position'] == 'post' :
+            self.add_tocs()
 
     def get_path_to_pdf(self, start):
         pdf_split = os.path.split(self.config['output_path'])
