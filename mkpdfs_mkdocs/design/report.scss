@@ -2,6 +2,10 @@
 
 @import "stylesheets/extensions.scss";
 
+$bgColor: #2196f3;
+$bgTextColor: #fff;
+
+
 @font-face {
   font-family: Fira Sans;
   font-weight: 400;
@@ -41,16 +45,16 @@
 
 @page {
   @top-left {
-    background: #2196f3;
+    background: $bgColor;
     content: counter(page);
     height: 1cm;
-    color: #fff;
+    color: $bgTextColor;
     text-align: center;
     width: 1cm;
   }
 
   @top-center {
-    background: #2196f3;
+    background: $bgColor;
     content: '';
     display: block;
     height: .05cm;
@@ -117,7 +121,7 @@
 
 
 @page :first {
-  background: no-repeat center;
+  background: url(cover.jpg) no-repeat center;
   background-size: cover;
   margin: 0;
 }
@@ -125,7 +129,7 @@
 
 html {
   article#doc-cover h1#doc-title {
-    color: #2196f3;
+    color: $bgColor;
     font-size: 38pt;
     margin: 5cm 2cm 0 2cm;
     page: no-chapter;
@@ -138,9 +142,9 @@ html {
     margin: 0;
     height: 297mm;
     address {
-      background: #2196f3;
+      background: $bgColor;
       flex: 1;
-      color: #fff;
+      color: $bgTextColor;
       margin: 0 -2cm;
       padding: 1cm 0;
       font-style: normal;
@@ -165,7 +169,7 @@ html {
 }
 
 @page chapter {
-  background: #2196f3;
+  background: $bgColor;
   margin: 0;
   @top-left {
     content: none;
@@ -188,7 +192,7 @@ html {
 
 html body {
   h1 {
-    color: #2196f3;
+    color: $bgColor;
     string-set: heading content();
   }
   h2, h3, h4 {
@@ -231,7 +235,7 @@ h2, h3, h4, h5 {
 
 html body article {
   a {
-    color: #2196f3;
+    color: $bgColor;
     text-decoration: none;
   }
   table {
@@ -257,7 +261,7 @@ html body article {
       font-weight: 500;
       margin: 3em 0 1em;
       &::before {
-        background: #2196f3;
+        background: $bgColor;
         content: '';
         display: block;
         height: .08cm;
@@ -273,7 +277,7 @@ html body article {
         margin: .15cm 0;
         padding-top: .15cm;
         &::before {
-          color: #2196f3;
+          color: $bgColor;
           content: '• ';
           font-size: 40pt;
           line-height: 16pt;
@@ -290,7 +294,7 @@ html body article {
       padding-left: 0;
     }
     div h4 a::after, ul li a::after {
-      color: #2196f3;
+      color: $bgColor;
       content: target-counter(attr(href), page);
       float: right;
     }
