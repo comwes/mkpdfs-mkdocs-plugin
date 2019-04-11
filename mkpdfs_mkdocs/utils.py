@@ -3,7 +3,11 @@ from bs4 import BeautifulSoup
 
 def modify_html(html: str, href: str) -> str:
     soup = BeautifulSoup(html, 'html.parser')
-    a = soup.new_tag('a', href=href, title='Download', download=None)
+    a = soup.new_tag('a',
+        href=href,
+        title='Download',
+        download=None
+        )
     a['class'] = 'md-content__icon pdf-download-btn'
     i = soup.new_tag('i')
     i['class'] = 'fa fa-download'
@@ -16,7 +20,9 @@ def modify_html(html: str, href: str) -> str:
 
 
 def gen_address (config):
-    soup = BeautifulSoup('<body></body>','html5lib')
+    soup = BeautifulSoup('<body></body>',
+        'html5lib'
+        )
     address = soup.new_tag('address')
     p = soup.new_tag('p')
     for line in [config['author'], config['company']]:
@@ -25,7 +31,9 @@ def gen_address (config):
             p.append(s)
     address.append(p)
     if config['copyright']:
-        span = soup.new_tag('p', id="copyright")
+        span = soup.new_tag('p',
+            id="copyright"
+            )
         span.append(config['copyright'])
         address.append(span)
     return address

@@ -4,9 +4,10 @@ from timeit import default_timer as timer
 
 from weasyprint import HTML,urls, CSS
 from bs4 import BeautifulSoup
-from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 from weasyprint.fonts import FontConfiguration
+
 from mkpdfs_mkdocs.utils import gen_address
+from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 
 class Generator(object):
 
@@ -19,7 +20,9 @@ class Generator(object):
         self._page_order = []
         self._base_urls = {}
         self._toc = None
-        self.html = BeautifulSoup('<html><head></head><body></body></html>', 'html.parser')
+        self.html = BeautifulSoup('<html><head></head>\
+        <body></body></html>',
+        'html.parser')
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.design = os.path.join(self.dir, 'design/report.css')
 
@@ -28,20 +31,24 @@ class Generator(object):
         if self.config['design']:
             css_file = os.path.join(os.getcwd(), self.config['design'])
             if not os.path.isfile(css_file) :
-                sys.exit('The file {} specified for design has not been found.'.format(css_file))
+                sys.exit('The file {} specified for design has not \
+                been found.'.format(css_file))
             self.design = css_file
         self.title = config['site_name']
-        self.config['copyright'] = 'MIT' if not config['copyright'] else config['copyright']
+        self.config['copyright'] = 'MIT\
+        ' if not config['copyright'] else config['copyright']
         self.mkdconfig = config
 
     def write(self):
         self.gen_articles()
         font_config = FontConfiguration()
         css = self.add_css(font_config);
-        pdf_path = os.path.join(self.mkdconfig['site_dir'], self.config['output_path'])
+        pdf_path = os.path.join(self.mkdconfig['site_dir'],
+        self.config['output_path'])
         os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
-        html = HTML(string=str(self.html)).write_pdf(pdf_path, font_config=font_config)
-        print("PDF version of the documentation generated.")
+        html = HTML(string=str(self.html)).write_pdf(pdf_path,
+        font_config=font_config)
+        print("The PDF version of the documentation has been generated.")
 
     def add_nav(self, nav):
         self.nav = nav
@@ -62,13 +69,17 @@ class Generator(object):
     def add_css(self, font_config):
         css_url = urls.path2url(self.design)
         self.html.head.clear()
-        css_tag = BeautifulSoup('<title>{}</title><link rel="stylesheet" href="{}" type="text/css">'.format(self.title, css_url), 'html5lib')
+        css_tag = BeautifulSoup(
+            '<title>{}</title><link rel="stylesheet" \
+            href="{}" type="text/css">'.
+            format(self.title, css_url), 'html5lib')
         self.html.head.insert(0, css_tag)
 
     def get_path_to_pdf(self, start):
         pdf_split = os.path.split(self.config['output_path'])
         start_dir = os.path.split(start)[0]
-        return os.path.join(os.path.relpath(pdf_split[0], start_dir), pdf_split[1])
+        return os.path.join(os.path.relpath(pdf_split[0],
+        start_dir), pdf_split[1])
 
     def add_tocs(self):
         soup = BeautifulSoup('<body></body>','html5lib')
@@ -107,7 +118,8 @@ class Generator(object):
     def get_path_to_pdf(self, start):
         pdf_split = os.path.split(self.config['output_path'])
         start_dir = os.path.split(start)[0]
-        return os.path.join(os.path.relpath(pdf_split[0], start_dir), pdf_split[1])
+        return os.path.join(os.path.relpath(pdf_split[0], start_dir),
+        pdf_split[1])
 
     def _gen_toc_section(self, section, soup):
         for p in section.children:
