@@ -42,3 +42,12 @@ dryrun:
 	@python3 design.py
 	@rm -rf "$(PROJECT_NAME)/design/node_modules"
 	@python3 setup.py sdist -n
+
+.PHONY: dev
+dev:
+	@tput bold && tput setaf 2
+	@echo "Installing package for development purpose $(PROJECT_NAME) $(PROJECT_VERSION)"
+	@tput sgr0
+	@pip3 install npm
+	@python3 design.py
+	@pip3 install -e .
