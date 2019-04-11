@@ -9,8 +9,8 @@ Unlike other plugin where customizing the design of the generated PDF is complic
 What makes this plugin particular, is that:
 
 1. Your documentation is exported as a single PDF file
-1. The order of pages fits the navigation as defined in the MkDocs configuration
-1. You can override the default design to make it fit your needs
+1. The order of pages fits the navigation as defined in the MkDocs configuration file
+1. The ability to override the default design to make it fit your needs
 1. No layout issues
 1. No conflict with the theme design
 1. Table of content integrated in the PDF
@@ -19,7 +19,7 @@ What makes this plugin particular, is that:
 
 1. This package requires MkDocs version 1.0
 2. Python 3.4 or higher
-3. WeasyPrint depends on cairo, Pango and GDK-PixBuf which need to be installed separately. Please follow the installation instructions for your platform carefully:
+3. WeasyPrint depends on cairo, Pango and GDK-PixBuf which need to be installed separately. Please follow the your platform installation instructions carefully:
     - [Linux][weasyprint-linux]
     - [MacOS][weasyprint-macos]
     - [Windows][weasyprint-windows]
@@ -32,7 +32,7 @@ Install the package with pip:
 pip install mkpdfs-mkdocs
 ```
 
-Enable the plugin in your `mkdocs.yml`:
+Enable the plugin in your `mkdocs.yml` as folowing
 
 ```yaml
 plugins:
@@ -40,15 +40,25 @@ plugins:
     - mkpdfs
 ```
 
-> **Note:** If you have no `plugins` entry in your MkDocs config file yet, you will need to explicitly enable the `search` plugin. This plugin is enabled by default when no `plugins` entry  is set.
+or with options
+
+```yaml
+plugins:
+    - search
+    - mkpdfs:
+        - company: The War Company Inc.
+        - author: Monsieur Silvestre
+```
+
+> **Note:** If you enable this plugin and you don't have `plugins` entry in your MkDocs config file yet, you will need to explicitly enable the `search` plugin. This plugin is enabled by default when no `plugins` entry is set.
 
 You can find further information about plugins in the [MkDocs documentation][mkdocs-plugins].
 
-## Does it work?
+## How does it work?
 
 When building or serving your documentation with `mkdocs build` or `mkdocs serve`, the following message will be displayed if everything wend smoothly:
 
-> PDF version of the documentation generated.
+> The PDF version of the documentation has been generated.
 
 ## Options
 
@@ -57,12 +67,12 @@ This plugin support following options to allow you better handle the customisati
 
 | Option | Description |
 | --- | --- |
-| `author` | The author of the document that will be printed on the cover page of the generated PDF. |
+| `author` | The author of the document. This information will be printed on the cover page of the generated PDF. |
 | `company` | If this documentation is from a company, then you should provide this information. It will be displayed on the front page of the documentation, bellow the author information|
-| `toc_title` | The table of content file. The default value is **Table of Contents** |
-| `toc_position` | The position of the table of contents. This option supports 3 differents values `pre` to put the toc at the beginning of the file but after the cover (*The default value*), `post` to put it at the end of the file or `null` to not generate it at all. |
+| `toc_title` | The table of content title. The default value is **Table of Contents** |
+| `toc_position` | The position of the table of contents. This option supports 3 differents values: `pre` to put the toc at the beginning of the file but after the cover (**the default value*), `post` to put it at the end of the file or `none` to not generate it at all. |
 | `output_path` | The file name of the generated PDF, relative to the `site_dir`. By default this location is set to `pdf/combined.pdf`|
-| `design` |  Relative to your MkDocs repository, this option is the location of the CSS file defining the layout of the generated PDF. If this option is not defined the default design will be used. |
+| `design` |  Relative to your `MkDocs repository`, this option is the location of the CSS file defining the layout of the generated PDF. If this option is not defined the default design will be used. Defining an non existing file will cause the build or serve failure. |
 
 ## Contributing
 
@@ -73,9 +83,10 @@ If you want to contribute to the code of this project, please read the [Contribu
 
 The idea of this plugin has raised while working on a project in the public sector. After many research I found some plugins that guided me to the current solution. They have inspired me a lot, so many thanks to:
 
-- [Terry Zhao][zhaoterryy] the author of the [MkDocs PDF Export Plugin][mkdocs-pdf-export-plugin] that inspired me a lot in this work.
-- [Kozea team][https://github.com/Kozea] for bringing [WeasyPrint](https://github.com/Kozea/WeasyPrint) to us as an open source project. The default design of the generated PDF is based on their work [Report Sample](https://github.com/Kozea/WeasyPrint/tree/gh-pages/samples/report).
+- [Terry Zhao][zhaoterryy] the author of the [MkDocs PDF Export Plugin][mkdocs-pdf-export-plugin] the source of our inspiration. We've used some of their code in this project.
+- [Kozea team][kozeateam] for bringing [WeasyPrint](https://github.com/Kozea/WeasyPrint) to us as an open source project. The default design of the generated PDF is based on their work [report Sample](https://github.com/Kozea/WeasyPrint/tree/gh-pages/samples/report).
 - [Martin Donath][squidfunk] the author of [Material for MkDocs][materialmkdoc], some of their css file were used to design the layout of Admonition, Codehilite, Arthmatex, emoji, and more.
+
 
 [weasyprint-linux]: https://weasyprint.readthedocs.io/en/latest/install.html#linux
 [weasyprint-macos]: https://weasyprint.readthedocs.io/en/latest/install.html#macos
@@ -84,6 +95,7 @@ The idea of this plugin has raised while working on a project in the public sect
 [github-issues]: https://github.com/comwes/mkpdfs-mkdocs-plugin/issues
 [contributing]: CONTRIBUTING.md
 [mkdocs-pdf-export-plugin]: https://github.com/zhaoterryy/mkdocs-pdf-export-plugin
+[kozeateam]: https://github.com/Kozea
 [zhaoterryy]:  https://github.com/zhaoterryy
 [squidfunk]: https://github.com/squidfunk
 [materialmkdoc]: https://github.com/squidfunk/mkdocs-material
