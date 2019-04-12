@@ -25,6 +25,7 @@ build:
 	@python3 design.py
 	@rm -rf "$(PROJECT_NAME)/design/node_modules"
 	@python3 setup.py sdist
+	@pip3 install dist/$(PROJECT_NAME)-$(PROJECT_VERSION).tar.gz
 
 .PHONY: clean
 clean:

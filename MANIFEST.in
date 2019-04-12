@@ -4,5 +4,4 @@ recursive-include mkpdfs_mkdocs *.ico *.jpg *.otf *.css *.eot *.ttf *.woff *.wof
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 recursive-exclude * .gitignore
-recursive-exclude *.egg-info *
 recursive-exclude mkpdfs_mkdocs/design/node* *
