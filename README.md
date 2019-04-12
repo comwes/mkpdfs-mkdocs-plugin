@@ -26,10 +26,10 @@ What makes this plugin particular, is that:
 
 ## Installation
 
-Install the package with pip:
+Install the package with `pip`:
 
 ```bash
-pip install mkpdfs-mkdocs
+pip3 install mkpdfs-mkdocs
 ```
 
 Enable the plugin in your `mkdocs.yml` as folowing
