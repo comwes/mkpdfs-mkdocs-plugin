@@ -4,8 +4,6 @@
 
 ### Installing MkDocs
 
-### Installing MkDocs
-
 Before installing [MkDocs][1], you need to make sure you have Python and `pip`
 – the Python package manager – up and running. You can verify if you're already
 good to go with the following commands:
