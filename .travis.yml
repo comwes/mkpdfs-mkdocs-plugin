@@ -35,10 +35,21 @@ notifications:
   email:
     on_success: never
 deploy:
-  provider: pypi
-  user: comwes
-  password:
-    secure: p7/b8fYpk15+6WUF3zeHFp838dHO/xTx1vNBEv2fcLVvSdqLyTWsBHqSIsUsyrEujOqa7t95ZP68+dgdOBQB+4cCsITfuIOio6jQHzrn7nMl+CYEfIOHyzFXKqR3ySJo0phRJuwu1hjzdWs4jrWPV2PvhacCbvWhIt4Jw/oZcMWsg0tAxvHRoxMYVi8GdcihOmuSPBSyEUnA6/TBTb8LvxsitE8scfylz0ECCajiE3Cel5UyxorbeTfm8Vk6RHlyJDxPh8GpPRry496Pwp/sM6rk5IX0jLJA0dTFaV7fMYVadRkYjs4U9E9L8Hcka4WGOJ2MgdnFqjnD7Pjup11FSi54fMimDLXa6wmLg54oP20Sd2p9zH/5wq/r9mOfUzcCXvHExFt4LYr83lhUKyZsuSVsb1T/m0+6SXq/CEirDJrO2STkMUyUTL2orksCox5nUvk+XUBcTQE/GU09nlNRn2n6R5GH+CUACVKSnRJaOmMhTMZLi4Bfj5tSD6uGw7sxTPO0+70gEU2J2X8HD315cufMMRR7hpzcQtZ0Vwdegy7jE6cB6lQcruPn+ggGwWZfODeXXKuIWLR7RTN+bxUTnU+HrvugLZEdFZiTpdoLD2sCVunoPrzNST+YG6UjTF+ocMbtKJV6S94UYyUMFAdDxbBMfnRVqD20TLVRxEN6gVc=
-  on:
-    tags: true
-    branch: master
+  - provider: pypi
+    user: comwes
+    password: $PYPIPROD
+    skip_existing: true
+    skip_cleanup: true
+    on:
+      tags: true
+      branch: master
+      condition: $TRAVIS_OS_NAME = 'osx'
+  - provider: pypi
+    user: comwes
+    password: $PYPISTAGING
+    skip_existing: true
+    skip_cleanup: true
+    server: https://test.pypi.org/legacy/
+    on:
+      branch: master
+      condition: $TRAVIS_OS_NAME = 'osx'
