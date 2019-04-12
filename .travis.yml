@@ -22,6 +22,7 @@ matrix:
 install:
 - pip3 install --upgrade pip
 - pip install npm
+- pip install twine
 branches:
   only:
   - master
