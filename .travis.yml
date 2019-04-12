@@ -20,9 +20,9 @@ matrix:
     osx_image: xcode10.2
     language: generic
 install:
-- pip3 install --upgrade pip
-- pip install npm
-- pip install twine
+  - pip3 install --upgrade pip
+  - pip3 install npm
+  - pip3 install twine
 branches:
   only:
   - master
