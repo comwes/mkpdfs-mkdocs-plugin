@@ -28,7 +28,6 @@ setup(
     ],
     project_urls={  # Optional
         'Bug Reports': 'https://github.com/comwes/mkpdfs-mkdocs-plugin/issues',
-        'Say Thanks!': 'http://saythanks.io/to/comwes',
         'Source': 'https://github.com/comwes/mkpdfs-mkdocs-plugin',
     },
     keywords='mkdocs documentation pdf export weasyprint markdown plugin',
@@ -38,7 +37,7 @@ setup(
         'Intended Audience :: Education',
         'Intended Audience :: Information Technology',
         'Intended Audience :: System Administrators',
-        'License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Topic :: Documentation',
         'Topic :: Printing',
         'Programming Language :: Other',
