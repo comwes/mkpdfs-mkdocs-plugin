@@ -26,7 +26,7 @@ install:
 branches:
   only:
   - master
-  - "/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+  - "v/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
 cache:
   pip: true
 git:
@@ -44,7 +44,7 @@ deploy:
     on:
       tags: true
       branch: master
-      condition: $TRAVIS_OS_NAME = 'osx'
+      condition: $TRAVIS_OS_NAME = 'linux'
   - provider: pypi
     user: comwes
     password: $PYPISTAGING
@@ -53,4 +53,4 @@ deploy:
     server: https://test.pypi.org/legacy/
     on:
       branch: master
-      condition: $TRAVIS_OS_NAME = 'osx'
+      condition: $TRAVIS_OS_NAME = 'linux'
