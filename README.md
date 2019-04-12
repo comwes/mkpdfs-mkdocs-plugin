@@ -1,4 +1,4 @@
-# MkPDFs for MkDocs [![Build Status](https://travis-ci.org/comwes/shost.svg?branch=master)](https://travis-ci.org/comwes/shost)
+# MkPDFs for MkDocs [![Build Status](https://travis-ci.org/comwes/mkpdfs-mkdocs-plugin.svg?branch=master)](https://travis-ci.org/comwes/mkpdfs-mkdocs-plugin)
 
 *It's a MkDocs plugin that export your documentation in a single PDF file*
 
@@ -62,7 +62,7 @@ When building or serving your documentation with `mkdocs build` or `mkdocs serve
 
 ## Options
 
-This plugin support following options to allow you better handle the customisation of the generated PDF.
+This plugin supports following options to allow you better handle the customisation of the generated PDF.
 
 
 | Option | Description |
