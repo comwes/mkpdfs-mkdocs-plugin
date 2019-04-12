@@ -1,0 +1,44 @@
+language: python
+sudo: false
+env: PYTHON=python
+matrix:
+  include:
+  - name: Python 3.4 on Linux
+    os: linux
+    python: 3.4
+  - name: Python 3.5 on Linux
+    os: linux
+    python: 3.5
+  - name: Python 3.7 on Linux
+    os: linux
+    python: 3.6
+  - name: Python 3.7 on Xenial
+    dist: xenial
+    python: 3.7
+  - name: Python 3.7 on MacOS
+    os: osx
+    osx_image: xcode10.2
+    language: generic
+install:
+- pip3 install --upgrade pip
+- pip install npm
+branches:
+  only:
+  - master
+  - "/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+cache:
+  pip: true
+git:
+  depth: 5
+script: make dist
+notifications:
+  email:
+    on_success: never
+deploy:
+  provider: pypi
+  user: comwes
+  password:
+    secure: GWpAuD8ssbFgI29S7NJkALGcyAmH6WgM16TAkDJzLK7E2OqKPtfwUQ2kQiYR7AoLIckdjFIwNY+HtkT2Bmh605zlHf8Gp1xcCF23gMTp//m9zgWbs4UJH9AtrKQSeEQTPJIMV9nraA9WXPdiLa2pK9pomcJmIuZEcY6p63t06N9lgmpcLqIsKknJNoB3r02O1GL7Vv+08XDNxFLO4lro+nT4HxzTjXK+y+ZR8X/WvLJihcUOQTNkNJsoDE0TWxHwAn9ItrF60901u7kcTBFrTi2ASCyvnj8CdTeaw+oxzaP7MnMqFnNynE1ldqO97jusOS/an4r/E6OtZK/9bJC3K4YRnbnEFmQlwcLvJOumcLgeZ1OMEEZCEZU65hKG3bOOIF959aJ0aXux16NrmTKnmt13tM98A8ptOF/p9+DQQxDSfcmyaGVFYn0S8LHP7dFupfcC3zvgIDBbiS92sS/8egLkjA7ozs1Yx2o6FCCbFLAOPo+SiMSJMePgiFRdQPKRZIBrFOx0h+1nbbPZE/DiSMYrQE6MIWCaOZEB8nucgIiKnT2dIJO65J9oaE1eqS6M7jPmxSbsOba9e26zfRCQHzdkuwTrgvd5IGHBNGWathPBQURtzXlosB19afnXVPGEVR3JAMPO5mKOOJ4jgCfmAbt29nx07gFgnR2toRUnP4E=
+  on:
+    tags: true
+    branch: master

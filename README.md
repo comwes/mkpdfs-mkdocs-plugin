@@ -1,4 +1,4 @@
-# MkPDFs for MkDocs
+# MkPDFs for MkDocs [![Build Status](https://travis-ci.org/comwes/shost.svg?branch=master)](https://travis-ci.org/comwes/shost)
 
 *It's a MkDocs plugin that export your documentation in a single PDF file*
 
