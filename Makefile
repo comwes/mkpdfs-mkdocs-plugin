@@ -9,11 +9,9 @@ RESET := \033[0m
 bold=$(tput bold)
 reset=$(tput sgr0)
 green := $(tput setaf 2)
-.DEFAULT_GOAL := dist
 
 .PHONY: dist
 dist: clean build
-
 
 
 .PHONY: build
@@ -34,18 +32,8 @@ clean:
 	@tput sgr0
 	@rm -rf dist
 
-.PHONY: dryrun
-dryrun:
-	@tput bold && tput setaf 2
-	@echo "Testing packaging $(PROJECT_NAME) $(PROJECT_VERSION)"
-	@tput sgr0
-	@pip3 install npm
-	@python3 design.py
-	@rm -rf "$(PROJECT_NAME)/design/node_modules"
-	@python3 setup.py sdist -n
-
-.PHONY: dev
-dev:
+.PHONY: develop
+develop:
 	@tput bold && tput setaf 2
 	@echo "Installing package for development purpose $(PROJECT_NAME) $(PROJECT_VERSION)"
 	@tput sgr0

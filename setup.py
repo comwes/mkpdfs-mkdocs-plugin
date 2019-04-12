@@ -10,7 +10,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='mkpdfs-mkdocs',
-    version='1.0.0a',
+    version='1.0.0',
     url='https://mkpdfs.comwes.eu',
     license='GPLv3',
     author='Comwes',

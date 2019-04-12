@@ -1,6 +1,5 @@
 language: python
 sudo: false
-env: PYTHON=python
 matrix:
   include:
   - name: Python 3.4 on Linux
@@ -40,17 +39,7 @@ deploy:
     user: comwes
     password: $PYPIPROD
     skip_existing: true
-    skip_cleanup: true
     on:
       tags: true
-      branch: master
-      condition: $TRAVIS_OS_NAME = 'linux'
-  - provider: pypi
-    user: comwes
-    password: $PYPISTAGING
-    skip_existing: true
-    skip_cleanup: true
-    server: https://test.pypi.org/legacy/
-    on:
       branch: master
       condition: $TRAVIS_OS_NAME = 'linux'
