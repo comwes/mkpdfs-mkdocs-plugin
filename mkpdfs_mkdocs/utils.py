@@ -10,9 +10,9 @@ def modify_html(html: str, href: str) -> str:
         )
     a['class'] = 'md-content__icon pdf-download-btn'
     i = soup.new_tag('i')
-    i['class'] = 'fa fa-download'
+    i['class'] = 'fa fas fa-download'
     small = soup.new_tag('small')
-    small.append(i)
+    a.append(i)
     small.append(' PDF')
     a.append(small)
     soup.article.insert(0, a)
