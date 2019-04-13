@@ -1,13 +1,13 @@
 # MkPDFs <small>for MkDocs</small>
 
-## Generate nice documentation PDFs.
+### Generate nice documentation PDFs.
 
 MkPDFs for MkDocs is a plugin for [MkDocs][1], a nice static site generator for
 designed for project documentation.
 
   [1]: https://www.mkdocs.org
 
-## Requirements
+### Requirements
 Before you start, make sure that your system meets the following requirements:
 
 1. MkDocs version 0.17.1 or higher
@@ -17,7 +17,7 @@ Before you start, make sure that your system meets the following requirements:
     - [MacOS][weasyprint-macos]
     - [Windows][weasyprint-windows]
 
-## Quick start
+### Quick start
 Install the latest version of MkPDFs for MkDocs with `pip`:
 
 ``` sh
@@ -42,7 +42,7 @@ plugins:
         - author: Monsieur Silvestre
 ```
 
-## Does it work?
+### Does it work?
 
 Now run `mkdocs serve` to run the dev server or `mkdocs build` to build your documentation. If the installation went, well you should see the following message:
 

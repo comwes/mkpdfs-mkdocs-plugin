@@ -1,0 +1,36 @@
+site_name: MkPDFs for MkDocs
+extra_css:
+  - 'stylesheets/extra.css'
+theme:
+  name: material
+  language: 'en'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  palette:
+    primary: 'blue'
+    accent: 'blue-light'
+repo_url: https://github.com/comwes/mkpdfs-mkdocs-plugin
+use_directory_urls: false
+edit_uri: ""
+# Copyright
+copyright: '© 2019 Comwes. CC-BY'
+nav:
+  - 'MkPDFs': 'index.md'
+  - 'Getting started': 'getting-started.md'
+  - 'Release notes': release-notes.md
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: false
+plugins:
+  - search
+  - mkpdfs:
+      author: Gerry Ntabuhashe
+      company: "Comwes"
+      toc_title: Table of contents
+      output_path: pdf/documentation.pdf

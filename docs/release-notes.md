@@ -1,4 +1,3 @@
-# Release notes
 
 ## Upgrading
 
@@ -15,6 +14,6 @@ pip show mkpdfs-mkdocs
 ```
 
 ## Changelog
-### 1.0.0 <small>_ April 13, 2019</small>
+### 1.0.0 <small>- April 13, 2019</small>
 
 * Initial release

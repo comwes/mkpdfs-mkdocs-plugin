@@ -2,26 +2,18 @@ language: python
 sudo: false
 matrix:
   include:
-  - name: Python 3.4 on Linux
-    os: linux
-    python: 3.4
-  - name: Python 3.5 on Linux
-    os: linux
-    python: 3.5
-  - name: Python 3.7 on Linux
-    os: linux
-    python: 3.6
-  - name: Python 3.7 on Xenial
+  - name: Python 3.6
     dist: xenial
-    python: 3.7
-  - name: Python 3.7 on MacOS
-    os: osx
-    osx_image: xcode10.2
-    language: generic
-install:
+    python: 3.6
+    env: GEN_DOC=yes
+
+before_install:
+  - pip3 install mkdocs-material
   - pip3 install --upgrade pip
   - pip3 install npm
   - pip3 install twine
+  - pip3 install mkdocs-material
+
 branches:
   only:
   - master
@@ -29,8 +21,12 @@ branches:
 cache:
   pip: true
 git:
-  depth: 5
-script: make dist
+  depth: 3
+  quiet: true
+script:
+  - make dist
+  - .docs.sh
+
 notifications:
   email:
     on_success: never
@@ -42,4 +38,3 @@ deploy:
     on:
       tags: true
       branch: master
-      condition: $TRAVIS_OS_NAME = 'linux'
