@@ -62,7 +62,10 @@ class Generator(object):
         article = soup.find('article')
         url = page.url.split('.')[0]
         article = prep_combined(article, base_url, page.file.url)
-        article.attrs['id'] = 'mkpdf-{}'.format(url)
+        span = soup.new_tag('span')
+        span['id'] = 'mkpdf-{}'.format(url)
+        article.insert(0, span)
+
         self._articles[page.file.url] = article
         return self.get_path_to_pdf(page.file.dest_path)
 
@@ -82,20 +85,19 @@ class Generator(object):
         start_dir), pdf_split[1])
 
     def add_tocs(self):
-        soup = BeautifulSoup('<body></body>','html5lib')
-        title = soup.new_tag('h1', id='doc-title')
+        title = self.html.new_tag('h1', id='doc-title')
         title.insert(0, self.config['toc_title'])
-        self._toc = soup.new_tag('article', id='contents')
+        self._toc = self.html.new_tag('article', id='contents')
         self._toc.insert(0, title)
         for n in self.nav:
-            h3 = soup.new_tag('h3')
+            h3 = self.html.new_tag('h3')
             h3.insert(0, n.title)
             self._toc.append(h3)
             if n.is_page :
-                ptoc = self._gen_toc_page(n.file.url, n.toc, soup)
+                ptoc = self._gen_toc_page(n.file.url, n.toc)
                 self._toc.append(ptoc)
             else :
-                self._gen_toc_section(n, soup)
+                self._gen_toc_section(n)
         self.html.body.append(self._toc)
 
     def add_cover(self):
@@ -121,44 +123,44 @@ class Generator(object):
         return os.path.join(os.path.relpath(pdf_split[0], start_dir),
         pdf_split[1])
 
-    def _gen_toc_section(self, section, soup):
+    def _gen_toc_section(self, section):
         for p in section.children:
-            stoc = self._gen_toc_for_section(p.file.url, p, soup)
-            child = soup.new_tag('div')
+            stoc = self._gen_toc_for_section(p.file.url, p)
+            child = self.html.new_tag('div')
             child.append(stoc)
             self._toc.append(child)
 
-    def _gen_children(self, url, children, soup):
-        ul = soup.new_tag('ul')
+    def _gen_children(self, url, children):
+        ul = self.html.new_tag('ul')
         for child in children:
-            a = soup.new_tag('a', href=child.url)
+            a = self.html.new_tag('a', href=child.url)
             a.insert(0, child.title)
-            li = soup.new_tag('li')
+            li = self.html.new_tag('li')
             li.append(a)
             if child.children :
-                sub = self._gen_children(url, child.children, soup)
+                sub = self._gen_children(url, child.children)
                 li.append(sub)
             ul.append(li)
         return ul
-    def _gen_toc_for_section(self, url, p, soup):
-        div = soup.new_tag('div')
-        menu = soup.new_tag('div')
-        h4 = soup.new_tag('h4')
+    def _gen_toc_for_section(self, url, p):
+        div = self.html.new_tag('div')
+        menu = self.html.new_tag('div')
+        h4 = self.html.new_tag('h4')
         urlid = url.split('.')[0]
-        a = soup.new_tag('a', href='#mkpdf-{}'.format(urlid))
+        a = self.html.new_tag('a', href='#mkpdf-{}'.format(urlid))
         a.insert(0, p.title)
         h4.append(a)
         menu.append(h4)
-        ul = soup.new_tag('ul')
+        ul = self.html.new_tag('ul')
         for child in p.toc.items:
-            a = soup.new_tag('a', href=child.url)
+            a = self.html.new_tag('a', href=child.url)
             a.insert(0, child.title)
-            li = soup.new_tag('li')
+            li = self.html.new_tag('li')
             li.append(a)
             if child.title == p.title:
-                li = soup.new_tag('div');
+                li = self.html.new_tag('div');
             if child.children :
-                sub = self._gen_children(url, child.children, soup)
+                sub = self._gen_children(url, child.children)
                 li.append(sub)
             ul.append(li)
         if len(p.toc.items)>0:
@@ -167,13 +169,18 @@ class Generator(object):
         div = prep_combined(div, self._base_urls[url], url)
         return div.find('div')
 
-    def _gen_toc_page(self, url, toc, soup):
-        div = soup.new_tag('div')
-        menu = soup.new_tag('div')
+    def _gen_toc_page(self, url, toc):
+        div = self.html.new_tag('div')
+        menu = self.html.new_tag('ul')
         for item in toc.items:
+            li = self.html.new_tag('li')
+            a = self.html.new_tag('a', href=item.url)
+            a.append(item.title)
+            li.append(a)
+            menu.append(li)
             if item.children :
-                child = self._gen_children(url, item.children, soup)
+                child = self._gen_children(url, item.children)
                 menu.append(child)
         div.append(menu)
         div = prep_combined(div, self._base_urls[url], url)
-        return div.find('div')
+        return div.find('ul')
