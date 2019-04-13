@@ -25,10 +25,12 @@ def gen_address (config):
         )
     address = soup.new_tag('address')
     p = soup.new_tag('p')
-    for line in [config['author'], config['company']]:
+    for k,line in {'author': config['author'],
+    'company': config['company']}.items():
         if line :
-            s = "{}\n".format(line)
-            p.append(s)
+            sp = soup.new_tag('p', **{'class': k})
+            sp.append("{}".format(line))
+            p.append(sp)
     address.append(p)
     if config['copyright']:
         span = soup.new_tag('p',
