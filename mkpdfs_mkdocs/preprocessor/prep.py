@@ -11,6 +11,7 @@ def get_combined(soup: BeautifulSoup, base_url: str, rel_url: str):
 
     for a in soup.find_all('a', href=True):
         if urls.url_is_absolute(a['href']) or os.path.isabs(a['href']):
+            a['class'] = 'external-link'
             continue
 
         a['href'] = transform_href(a['href'], rel_url)

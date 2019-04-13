@@ -225,13 +225,6 @@ html body {
         content: attr(data-title) " https://mkpdfs.comwes.eu" attr(src);
       }
     }
-    img[alt]::after {
-      content: " - " attr(alt);
-      font-style: italic;
-      text-align: center;
-      display: block;
-      padding: .2cm 0;
-    }
   }
 }
 
@@ -243,6 +236,11 @@ html body article {
   a {
     color: $bgColor;
     text-decoration: none;
+    &.external-link::after {
+      content: " (" attr(href) ")";
+      font-style: italic;
+    }
+
   }
   table {
     border-spacing: 0;
@@ -317,6 +315,3 @@ html body article {
     text-align: justify;
   }
 }
-
-/* html body article#contents ul li a::before {
-  content: target-text(attr(href)); } */
