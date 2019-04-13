@@ -25,7 +25,6 @@ git:
   quiet: true
 script:
   - make dist
-  - .docs.sh
 
 notifications:
   email:
@@ -38,3 +37,5 @@ deploy:
     on:
       tags: true
       branch: master
+after_success:
+  - ./.docs.sh
