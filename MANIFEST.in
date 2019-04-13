@@ -1,7 +1,8 @@
-include README.md
-include LICENSE
-recursive-include mkpdfs_mkdocs *.ico *.jpg *.otf *.css *.eot *.ttf *.woff *.woff2
+recursive-include mkpdfs_mkdocs *.jpg *.otf *.css *.ttf *.woff *.woff2
+recursive-exclude mkpdfs_mkdocs/design/node_* *
+recursive-exclude * *.scss *.json
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
 recursive-exclude * .gitignore
-recursive-exclude mkpdfs_mkdocs/design/node* *
+include README.md
+include LICENSE

@@ -11,7 +11,7 @@ reset=$(tput sgr0)
 green := $(tput setaf 2)
 
 .PHONY: dist
-dist: clean build
+dist: clean build install
 
 
 .PHONY: build
@@ -21,8 +21,10 @@ build:
 	@tput sgr0
 	@pip3 install npm
 	@python3 design.py
-	@rm -rf "$(PROJECT_NAME)/design/node_modules"
-	@python3 setup.py sdist
+	@python3 setup.py sdist bdist_wheel
+
+.PHONY: install
+install:
 	@pip3 install dist/$(PROJECT_NAME)-$(PROJECT_VERSION).tar.gz
 
 .PHONY: clean
