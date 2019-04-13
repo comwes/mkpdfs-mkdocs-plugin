@@ -15,9 +15,9 @@ before_install:
   - pip3 install mkdocs-material
 addons:
   apt:
-    update: true
     sources:
       - sourceline: 'deb http://be.archive.ubuntu.com/ubuntu/ bionic main restricted'
+    update: true
 
 branches:
   only:
