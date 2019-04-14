@@ -19,12 +19,9 @@ addons:
       - sourceline: 'deb http://be.archive.ubuntu.com/ubuntu/ bionic main restricted'
     update: true
 
-branches:
-  only:
-  - master
-  - "v/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
 cache:
   pip: true
+
 git:
   depth: 3
   quiet: true
@@ -34,6 +31,7 @@ script:
 notifications:
   email:
     on_success: never
+
 deploy:
   - provider: pypi
     user: comwes
@@ -43,4 +41,4 @@ deploy:
       tags: true
       branch: master
 after_success:
-  - ./.docs.sh
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./.docs.sh; fi'

@@ -33,7 +33,7 @@ setup(
     },
     keywords='mkdocs documentation pdf export weasyprint markdown plugin',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Intended Audience :: Education',
         'Intended Audience :: Information Technology',
