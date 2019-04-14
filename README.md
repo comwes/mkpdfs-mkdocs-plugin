@@ -2,6 +2,10 @@
 
 *It's a MkDocs plugin that export your documentation in a single PDF file*
 
+[![MkPDFs for MkDocs](https://raw.githubusercontent.com/comwes/mkpdfs-mkdocs-plugin/master/docs/assets/images/mkpdfs.png)][mkpdfsdoc]
+  [mkpdfsdoc]: https://mkpdfs.comwes.eu
+
+
 The MkPDFs plugin will export yor documentation in your MkDocs repository as a PDF file using [WeasyPrint](http://weasyprint.org/).
 
 Unlike other plugin where customizing the design of the generated PDF is complicated, this plugin brings the ability to completely control the design of the generated PDF.
@@ -19,7 +23,7 @@ What makes this plugin particular, is that:
 
 1. This package requires MkDocs version 1.0
 2. Python 3.4 or higher
-3. WeasyPrint depends on cairo, Pango and GDK-PixBuf which need to be installed separately. Please follow the your platform installation instructions carefully:
+3. WeasyPrint depends on cairo, Pango and GDK-PixBuf which need to be installed separately. Please follow your platform installation instructions carefully:
     - [Linux][weasyprint-linux]
     - [MacOS][weasyprint-macos]
     - [Windows][weasyprint-windows]

@@ -1,4 +1,5 @@
 site_name: MkPDFs for MkDocs
+site_author: Comwes
 extra_css:
   - 'stylesheets/extra.css'
 theme:
@@ -18,6 +19,7 @@ copyright: '© 2019 Comwes. CC-BY'
 nav:
   - 'MkPDFs': 'index.md'
   - 'Getting started': 'getting-started.md'
+  - 'Layout customisation': 'layout-design.md'
   - 'Release notes': release-notes.md
 
 markdown_extensions:

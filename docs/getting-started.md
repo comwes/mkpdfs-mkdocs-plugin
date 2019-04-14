@@ -44,3 +44,18 @@ You can customise the layout of the generated PDF using exposed options presente
 | `toc_position` | The position of the table of contents. This option supports 3 differents values: `pre` to put the toc at the beginning of the file but after the cover (**the default value*), `post` to put it at the end of the file or `none` to not generate it at all. |
 | `output_path` | The file name of the generated PDF, relative to the `site_dir`. By default this location is set to `pdf/combined.pdf`|
 | `design` |  Relative to your `MkDocs repository`, this option is the location of the CSS file defining the layout of the generated PDF. If this option is not defined the default design will be used. Defining an non existing file will cause the build or serve failure. |
+
+### Configuration example
+Here is an example of configuration that you can adapt depending on your needs.
+
+``` yaml
+plugins:
+    - search
+    - mkpdfs:
+        - company: The War Company Inc.
+        - author: Monsieur Silvestre
+        - toc_title: ToC
+```
+
+### Documentation design
+You have the ability to design the layout of your Generated PDF by using CSS. You can find out complete documentation by visiting our [Layout customisation](layout-design.md) section.
