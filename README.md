@@ -2,7 +2,7 @@
 
 *It's a MkDocs plugin that export your documentation in a single PDF file*
 
-[![MkPDFs for MkDocs](https://raw.githubusercontent.com/comwes/mkpdfs-mkdocs-plugin/master/docs/assets/images/mkpdfs.png)] [mkpdfsdoc]
+[![MkPDFs for MkDocs](https://raw.githubusercontent.com/comwes/mkpdfs-mkdocs-plugin/master/docs/assets/images/mkpdfs.png)][mkpdfsdoc]
 
   [mkpdfsdoc]: https://mkpdfs.comwes.eu
 
