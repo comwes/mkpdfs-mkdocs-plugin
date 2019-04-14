@@ -41,4 +41,4 @@ deploy:
       tags: true
       branch: master
 after_success:
-  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./.docs.sh; fi'
+  - ./.docs.sh
