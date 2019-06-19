@@ -119,6 +119,20 @@ $bgTextColor: #fff;
   }
 }
 
+@page chapter {
+  margin: 0;
+  padding: 0;
+  @top-left {
+    content: none;
+  }
+  @top-center {
+    content: none;
+  }
+  @top-right {
+    content: none;
+  }
+ }
+
 
 @page :first {
   background: url(cover.jpg) no-repeat center;
@@ -129,6 +143,24 @@ $bgTextColor: #fff;
 
 
 html {
+  body {
+    article.chapter {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      height: 297mm;
+      justify-content: flex-end;
+      page: chapter;
+      h1.section_title{
+        background-color: $bgColor;
+        padding: 1cm;
+        width: 60%;
+        text-align: center;
+        color: $bgTextColor;
+        font-size: 30pt;
+      }
+    }
+  }
   article#doc-cover h1#doc-title {
     color: $bgColor;
     font-size: 38pt;
@@ -172,22 +204,6 @@ html {
   font-size: 11pt;
   font-weight: 300;
   line-height: 1.5;
-}
-
-@page chapter {
-  background: $bgColor;
-  margin: 0;
-  @top-left {
-    content: none;
-  }
-
-  @top-center {
-    content: none;
-  }
-
-  @top-right {
-    content: none;
-  }
 }
 
 

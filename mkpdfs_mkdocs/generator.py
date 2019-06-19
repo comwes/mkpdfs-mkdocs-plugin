@@ -1,5 +1,6 @@
 import os
 import sys
+from uuid import uuid4
 from timeit import default_timer as timer
 
 from weasyprint import HTML,urls, CSS
@@ -52,8 +53,28 @@ class Generator(object):
 
     def add_nav(self, nav):
         self.nav = nav
-        for page in nav.pages:
+        for p in nav:
+            self.addToOrder(p)
+
+    def addToOrder(self, page):
+        if page.is_page :
             self._page_order.append(page.file.url)
+        else :
+            uuid = str(uuid4())
+            self._page_order.append(uuid)
+            title = self.html.new_tag('h1',
+                id='{}-title'.format(uuid),
+                **{'class': 'section_title'}
+            )
+            title.append(page.title)
+            article = self.html.new_tag('article',
+                id='{}'.format(uuid),
+                **{'class': 'chapter'}
+            )
+            article.append(title)
+            self._articles[uuid] = article
+            for child in page.children:
+                self.addToOrder(child)
 
 
     def add_article(self, content, page, base_url):
