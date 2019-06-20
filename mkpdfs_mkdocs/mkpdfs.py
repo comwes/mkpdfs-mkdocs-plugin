@@ -56,7 +56,8 @@ class Mkpdfs(BasePlugin):
         filename = os.path.splitext(os.path.basename(src_path))[0]
         base_url = urls.path2url(os.path.join(path, filename))
         pdf_url = self.generator.add_article(output_content, page, base_url)
-        output_content = modify_html(output_content,pdf_url)
+        if pdf_url :
+            output_content = modify_html(output_content,pdf_url)
         return output_content
 
     def on_post_build(self, config):

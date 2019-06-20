@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 from uuid import uuid4
@@ -10,6 +11,8 @@ from weasyprint.fonts import FontConfiguration
 from mkpdfs_mkdocs.utils import gen_address
 from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 
+log = logging.getLogger(__name__)
+
 class Generator(object):
 
     def __init__(self):
@@ -17,6 +20,8 @@ class Generator(object):
         self.design = None
         self.mkdconfig = None
         self.nav = None
+        self.logger = logging.getLogger('mkdocs.mkpdfs')
+        self.generate = True
         self._articles = {}
         self._page_order = []
         self._base_urls = {}
@@ -41,6 +46,10 @@ class Generator(object):
         self.mkdconfig = config
 
     def write(self):
+        if not self.generate:
+            self.logger.log(msg='Unable to generate the PDF Version (See Mkpdfs doc)',
+            level=logging.WARNING,)
+            return
         self.gen_articles()
         font_config = FontConfiguration()
         css = self.add_css(font_config);
@@ -49,7 +58,7 @@ class Generator(object):
         os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
         html = HTML(string=str(self.html)).write_pdf(pdf_path,
         font_config=font_config)
-        print("The PDF version of the documentation has been generated.")
+        self.logger.log(msg='The PDF version of the documentation has been generated.', level=logging.INFO,)
 
     def add_nav(self, nav):
         self.nav = nav
@@ -78,15 +87,25 @@ class Generator(object):
 
 
     def add_article(self, content, page, base_url):
+        if not self.generate:
+            return None
         self._base_urls[page.file.url] = base_url
         soup = BeautifulSoup(content, 'html.parser')
-        article = soup.find('article')
         url = page.url.split('.')[0]
+        article = soup.find('article')
+        if not article :
+            article = self.html.new_tag('article')
+            eld = soup.find('div', **{'role': 'main'})
+            article.append(eld)
+            article.div['class'] = article.div['role'] = None
+
+        if not article:
+            self.generate = False
+            return None
         article = prep_combined(article, base_url, page.file.url)
         span = soup.new_tag('span')
         span['id'] = 'mkpdf-{}'.format(url)
         article.insert(0, span)
-
         self._articles[page.file.url] = article
         return self.get_path_to_pdf(page.file.dest_path)
 

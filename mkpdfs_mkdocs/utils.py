@@ -15,7 +15,10 @@ def modify_html(html: str, href: str) -> str:
     a.append(i)
     small.append(' PDF')
     a.append(small)
-    soup.article.insert(0, a)
+    if(soup.article):
+        soup.article.insert(0, a)
+    else:
+        soup.find('div', **{'role': 'main'}).insert(0, a);
     return str(soup)
 
 
