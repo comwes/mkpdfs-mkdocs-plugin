@@ -1,5 +1,6 @@
 site_name: MkPDFs for MkDocs
 site_author: Comwes
+site_url: https://comwes.github.io/mkpdfs-mkdocs-plugin/
 extra_css:
   - 'stylesheets/extra.css'
 theme:

@@ -18,7 +18,7 @@ What makes this plugin particular, is that:
 1. The ability to override the default design to make it fit your needs
 1. No layout issues
 1. No conflict with the theme design
-1. Table of content integrated in the PDF
+1. Table of contents integrated in the PDF
 
 ## Requirements
 
@@ -28,6 +28,10 @@ What makes this plugin particular, is that:
     - [Linux][weasyprint-linux]
     - [MacOS][weasyprint-macos]
     - [Windows][weasyprint-windows]
+
+## Limitation
+
+The PDF version of the documentation will not be created if the used generated page content's is not enclosed in an `<article>` tag  or in a `<div>` tag with property `role="main"`.
 
 ## Installation
 
