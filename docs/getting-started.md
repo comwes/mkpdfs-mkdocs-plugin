@@ -6,6 +6,8 @@ Before installing [MkDocs][1], you need to make sure you have Python and `pip`
 – the Python package manager – up and running. You can verify if you're already
 good to go with the following commands:
 
+[1]: https://www.mkdocs.org
+
 ``` sh
 python --version
 # Python 3.6.7
@@ -55,6 +57,22 @@ plugins:
         - company: The War Company Inc.
         - author: Monsieur Silvestre
         - toc_title: ToC
+```
+
+### Hide file content from the generated PDF
+Sometime it can be interesting to hide a given documentation file from the PDF.
+
+This can be achieved by using the [Mkdocs YAML Style Meta-Data](https://www.mkdocs.org/user-guide/writing-your-docs/#yaml-style-meta-data) features.
+
+For this, define a `pdf` metadata and set  it to `False` in the top of your Markdown file like in the following example.
+
+``` markdown
+---
+pdf: False
+---
+
+#Page title
+
 ```
 
 ### Documentation design

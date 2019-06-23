@@ -16,6 +16,7 @@ What makes this plugin particular, is that:
 1. Your documentation is exported as a single PDF file
 1. The order of pages fits the navigation as defined in the MkDocs configuration file
 1. The ability to override the default design to make it fit your needs
+1. The ability to exclude some files from the generated PDF
 1. No layout issues
 1. No conflict with the theme design
 1. Table of contents integrated in the PDF

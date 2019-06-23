@@ -66,6 +66,10 @@ class Generator(object):
             self.addToOrder(p)
 
     def addToOrder(self, page):
+        if page.is_page and page.meta != None and 'pdf' in page.meta and page.meta['pdf'] == False:
+            print(page.meta)
+            exit(1)
+            return;
         if page.is_page :
             self._page_order.append(page.file.url)
         else :
@@ -85,6 +89,10 @@ class Generator(object):
             for child in page.children:
                 self.addToOrder(child)
 
+
+    def remove_from_order(self, item):
+
+        return
 
     def add_article(self, content, page, base_url):
         if not self.generate:
@@ -106,6 +114,9 @@ class Generator(object):
         span = soup.new_tag('span')
         span['id'] = 'mkpdf-{}'.format(url)
         article.insert(0, span)
+        if page.meta != None and 'pdf' in page.meta and page.meta['pdf'] == False:
+            # print(page.meta)
+            return self.get_path_to_pdf(page.file.dest_path)
         self._articles[page.file.url] = article
         return self.get_path_to_pdf(page.file.dest_path)
 
@@ -130,6 +141,9 @@ class Generator(object):
         self._toc = self.html.new_tag('article', id='contents')
         self._toc.insert(0, title)
         for n in self.nav:
+            if n.is_page and n.meta != None and 'pdf' in n.meta \
+            and n.meta['pdf'] == False:
+                continue
             h3 = self.html.new_tag('h3')
             h3.insert(0, n.title)
             self._toc.append(h3)
@@ -153,7 +167,8 @@ class Generator(object):
         if self.config['toc_position'] == 'pre' :
             self.add_tocs()
         for url in self._page_order:
-            self.html.body.append(self._articles[url])
+            if url in self._articles:
+                self.html.body.append(self._articles[url])
         if self.config['toc_position'] == 'post' :
             self.add_tocs()
 
@@ -165,6 +180,9 @@ class Generator(object):
 
     def _gen_toc_section(self, section):
         for p in section.children:
+            if p.is_page and p.meta != None and 'pdf' \
+            in p.meta and p.meta['pdf'] == False:
+                continue
             stoc = self._gen_toc_for_section(p.file.url, p)
             child = self.html.new_tag('div')
             child.append(stoc)
