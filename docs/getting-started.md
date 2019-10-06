@@ -54,9 +54,9 @@ Here is an example of configuration that you can adapt depending on your needs.
 plugins:
     - search
     - mkpdfs:
-        - company: The War Company Inc.
-        - author: Monsieur Silvestre
-        - toc_title: ToC
+        company: The War Company Inc.
+        author: Monsieur Silvestre
+        toc_title: ToC
 ```
 
 ### Hide file content from the generated PDF

@@ -21,7 +21,7 @@ You can customise your PDF layout design by passing a CSS file location to the p
 plugins:
     - search
     - mkpdfs:
-        - design: design/style.css
+        design: design/style.css
 
 ```
 
@@ -107,7 +107,7 @@ Now add enable MkPDFs plugin and include the design file in 'mkdocs.yml'.
 plugins:
     - search
     - mkpdfs:
-        - design: mkpdfs-design-sample/report.css
+        design: mkpdfs-design-sample/report.css
 ```
 
 Once the plugin has been enabled, you can now run one of these commands to see the result:

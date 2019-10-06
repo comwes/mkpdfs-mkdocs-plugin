@@ -43,8 +43,8 @@ or with options
 plugins:
     - search
     - mkpdfs:
-        - company: The War Company Inc.
-        - author: Monsieur Silvestre
+        company: The War Company Inc.
+        author: Monsieur Silvestre
 ```
 
 ### Does it work?
