@@ -12,10 +12,10 @@ def transform_href(href: str, rel_url: str):
         head, section = os.path.split(rel_url)
         section = os.path.splitext(section)[0]
         id = tail[1:]
-    elif num_hashtags is 1:
+    elif num_hashtags == 1:
         section, ext = tuple(os.path.splitext(tail))
-        id = str.split(ext, '#')[1]
-        
+        id = str.split(ext if len(ext) > 0 else section, '#')[1]
+
         if head == '..':
             href = normalize_href(href, rel_url)
             return '#{}:{}'.format(href, id)
