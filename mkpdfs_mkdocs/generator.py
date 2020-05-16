@@ -183,6 +183,12 @@ class Generator(object):
             if p.is_page and p.meta != None and 'pdf' \
             in p.meta and p.meta['pdf'] == False:
                 continue
+            if p.is_section:
+                h3 = self.html.new_tag('h3')
+                h3.insert(0, p.title)
+                self._toc.append(h3)
+                self._gen_toc_section(p)
+                continue
             stoc = self._gen_toc_for_section(p.file.url, p)
             child = self.html.new_tag('div')
             child.append(stoc)
