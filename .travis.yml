@@ -37,6 +37,7 @@ deploy:
     user: comwes
     password: $PYPIPROD
     skip_existing: true
+    skip_cleanup: true
     on:
       tags: true
       branch: master
