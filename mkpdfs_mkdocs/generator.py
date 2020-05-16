@@ -189,6 +189,12 @@ class Generator(object):
                 if p.is_page and p.meta and 'pdf' \
                         in p.meta and not p.meta['pdf']:
                     continue
+                if p.is_section:
+                    h3 = self.html.new_tag('h3')
+                    h3.insert(0, p.title)
+                    self._toc.append(h3)
+                    self._gen_toc_section(p)
+                    continue
                 if not hasattr(p, 'file'):
                     # Skip external links
                     continue
