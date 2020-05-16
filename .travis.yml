@@ -25,8 +25,12 @@ cache:
 git:
   depth: 3
   quiet: true
+
 script:
   - make dist
+
+after_success:
+  - ./.docs.sh
 
 notifications:
   email:
@@ -41,5 +45,3 @@ deploy:
     on:
       tags: true
       branch: master
-after_success:
-  - ./.docs.sh
