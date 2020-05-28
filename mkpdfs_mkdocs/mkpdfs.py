@@ -27,7 +27,7 @@ class Mkpdfs(BasePlugin):
     def __init__(self):
         self.generator = Generator()
 
-    def on_serve (self, server, config ):
+    def on_serve (self, server, config, **kwargs):
         # TODO: Implement watcher when the user is performing design
     #     print(server.watcher.__dict__)
     #     # builder = build(config, True, False)
