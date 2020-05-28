@@ -5,7 +5,6 @@ from timeit import default_timer as timer
 from mkdocs.config import config_options
 from mkdocs.plugins import BasePlugin
 from mkdocs.commands.build import build
-from mkdocs import utils
 
 from weasyprint import HTML,urls, CSS
 from bs4 import BeautifulSoup
@@ -17,12 +16,12 @@ from mkpdfs_mkdocs.utils import modify_html
 class Mkpdfs(BasePlugin):
 
     config_scheme = (
-        ('design', config_options.Type(utils.string_types, default=None)),
-        ('toc_title', config_options.Type(utils.string_types, default="Table of Contents")),
-        ('company', config_options.Type(utils.string_types, default=None)),
-        ('author', config_options.Type(utils.string_types, default=None)),
-        ('toc_position', config_options.Type(utils.string_types, default="pre")),
-        ('output_path', config_options.Type(utils.string_types, default="pdf/combined.pdf")),
+        ('design', config_options.Type(str, default=None)),
+        ('toc_title', config_options.Type(str, default="Table of Contents")),
+        ('company', config_options.Type(str, default=None)),
+        ('author', config_options.Type(str, default=None)),
+        ('toc_position', config_options.Type(str, default="pre")),
+        ('output_path', config_options.Type(str, default="pdf/combined.pdf")),
     )
 
     def __init__(self):
