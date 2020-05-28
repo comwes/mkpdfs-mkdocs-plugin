@@ -144,6 +144,9 @@ class Generator(object):
             if n.is_page and n.meta != None and 'pdf' in n.meta \
             and n.meta['pdf'] == False:
                 continue
+            if hasattr(n, 'url'):
+                # Skip toc generation for external links
+                continue
             h3 = self.html.new_tag('h3')
             h3.insert(0, n.title)
             self._toc.append(h3)
@@ -179,14 +182,18 @@ class Generator(object):
         pdf_split[1])
 
     def _gen_toc_section(self, section):
-        for p in section.children:
-            if p.is_page and p.meta != None and 'pdf' \
-            in p.meta and p.meta['pdf'] == False:
-                continue
-            stoc = self._gen_toc_for_section(p.file.url, p)
-            child = self.html.new_tag('div')
-            child.append(stoc)
-            self._toc.append(child)
+        if section.children:  # External Links do not have children
+            for p in section.children:
+                if p.is_page and p.meta != None and 'pdf' \
+                in p.meta and p.meta['pdf'] == False:
+                    continue
+                if not hasattr(p, 'file'):
+                    # Skip external links
+                    continue
+                stoc = self._gen_toc_for_section(p.file.url, p)
+                child = self.html.new_tag('div')
+                child.append(stoc)
+                self._toc.append(child)
 
     def _gen_children(self, url, children):
         ul = self.html.new_tag('ul')
