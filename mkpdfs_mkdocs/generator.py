@@ -72,7 +72,7 @@ class Generator(object):
             return;
         if page.is_page :
             self._page_order.append(page.file.url)
-        else :
+        elif page.children:
             uuid = str(uuid4())
             self._page_order.append(uuid)
             title = self.html.new_tag('h1',
