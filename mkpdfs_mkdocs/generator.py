@@ -10,6 +10,7 @@ from weasyprint.fonts import FontConfiguration
 from mkpdfs_mkdocs.utils import gen_address
 from .utils import is_external
 from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
+from mkpdfs_mkdocs.preprocessor import nest_heading_bookmarks
 from mkpdfs_mkdocs.preprocessor import remove_header_links
 from mkpdfs_mkdocs.preprocessor import remove_material_header_icons
 
@@ -28,6 +29,7 @@ class Generator(object):
         self.generate = True
         self._articles = {}
         self._page_order = []
+        self._page_nesting = {}
         self._base_urls = {}
         self._toc = None
         self.html = BeautifulSoup('<html><head></head>\
@@ -69,17 +71,20 @@ class Generator(object):
         for p in nav:
             self.add_to_order(p)
 
-    def add_to_order(self, page):
+    def add_to_order(self, page, level=1):
         if page.is_page and page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             return
         if page.is_page:
+            self._page_nesting[page.file.url] = level - 1
             self._page_order.append(page.file.url)
         elif page.children:
             uuid = str(uuid4())
             self._page_order.append(uuid)
             title = self.html.new_tag('h1',
                                       id='{}-title'.format(uuid),
-                                      **{'class': 'section_title'}
+                                      **{'class': 'section_title',
+                                          # See also nest_heading_bookmarks()
+                                         'style': 'bookmark-level:{}'.format(level)}
                                       )
             title.append(page.title)
             article = self.html.new_tag('article',
@@ -89,7 +94,7 @@ class Generator(object):
             article.append(title)
             self._articles[uuid] = article
             for child in page.children:
-                self.add_to_order(child)
+                self.add_to_order(child, level=level + 1)
 
     def remove_from_order(self, item):
         return
@@ -114,6 +119,9 @@ class Generator(object):
             article = remove_material_header_icons(article)
         article = prep_combined(article, base_url, page.file.url)
         article = remove_header_links(article)
+        article = nest_heading_bookmarks(
+            article, self._page_nesting.get(page.file.url, 0)
+        )
         if page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             # print(page.meta)
             return self.get_path_to_pdf(page.file.dest_path)

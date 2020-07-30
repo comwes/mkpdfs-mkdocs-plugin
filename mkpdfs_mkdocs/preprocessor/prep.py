@@ -42,3 +42,20 @@ def remove_header_links(soup: BeautifulSoup):
     for a in soup.find_all('a', **{'class': 'headerlink'}):
         a.decompose()
     return soup
+
+def nest_heading_bookmarks(soup: BeautifulSoup, inc: int):
+    """Ensure titles & subheadings of pages are properly nested as bookmarks.
+
+    So that while a page's titles always starts as <h1>,
+    when seen in the PDF index, all page headings will be nested according
+    to the page's nesting under sections & subsections.
+    """
+    if not inc:
+        return soup
+    assert isinstance(inc, int) and inc > 0
+    for i in range(6, 0, -1):
+        # For each level of heading, add an inline CSS style that sets the
+        # bookmark-level to the heading level + `inc`.
+        for h in soup.find_all('h{}'.format(i)):
+            h['style'] = 'bookmark-level:{}'.format(i + inc)
+    return soup
