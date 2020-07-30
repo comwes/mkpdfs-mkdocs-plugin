@@ -10,6 +10,7 @@ from weasyprint.fonts import FontConfiguration
 from mkpdfs_mkdocs.utils import gen_address
 from .utils import is_external
 from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
+from mkpdfs_mkdocs.preprocessor import remove_header_links
 
 log = logging.getLogger(__name__)
 
@@ -109,6 +110,7 @@ class Generator(object):
             self.generate = False
             return None
         article = prep_combined(article, base_url, page.file.url)
+        article = remove_header_links(article)
         if page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             # print(page.meta)
             return self.get_path_to_pdf(page.file.dest_path)

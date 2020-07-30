@@ -28,3 +28,8 @@ def get_separate(soup: BeautifulSoup, base_url: str):
 
     soup = replace_asset_hrefs(soup, base_url)
     return soup
+
+def remove_header_links(soup: BeautifulSoup):
+    for a in soup.find_all('a', **{'class': 'headerlink'}):
+        a.decompose()
+    return soup
