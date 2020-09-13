@@ -19,3 +19,4 @@ site
 report.css
 build
 venv
+.*.sw[pon]
