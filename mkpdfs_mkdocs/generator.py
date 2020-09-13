@@ -11,6 +11,7 @@ from mkpdfs_mkdocs.utils import gen_address
 from .utils import is_external
 from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 from mkpdfs_mkdocs.preprocessor import remove_header_links
+from mkpdfs_mkdocs.preprocessor import remove_material_header_icons
 
 log = logging.getLogger(__name__)
 
@@ -109,6 +110,8 @@ class Generator(object):
         if not article:
             self.generate = False
             return None
+        if self.mkdconfig['theme'].name == 'material':
+            article = remove_material_header_icons(article)
         article = prep_combined(article, base_url, page.file.url)
         article = remove_header_links(article)
         if page.meta and 'pdf' in page.meta and not page.meta['pdf']:

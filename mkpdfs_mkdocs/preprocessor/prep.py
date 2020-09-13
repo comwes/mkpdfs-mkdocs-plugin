@@ -29,6 +29,15 @@ def get_separate(soup: BeautifulSoup, base_url: str):
     soup = replace_asset_hrefs(soup, base_url)
     return soup
 
+def remove_material_header_icons(soup: BeautifulSoup):
+    """Removes links added to article headers by material theme such as the
+    page edit link/url (pencil icon)."""
+    # see https://github.com/squidfunk/mkdocs-material/issues/1920
+    # for justification of why this CSS class is used
+    for a in soup.find_all('a', **{'class': 'md-content__button'}):
+        a.decompose()
+    return soup
+
 def remove_header_links(soup: BeautifulSoup):
     for a in soup.find_all('a', **{'class': 'headerlink'}):
         a.decompose()
