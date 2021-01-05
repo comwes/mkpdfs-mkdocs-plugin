@@ -111,9 +111,6 @@ class Generator(object):
             self.generate = False
             return None
         article = prep_combined(article, base_url, page.file.url)
-        span = soup.new_tag('span')
-        span['id'] = 'mkpdf-{}'.format(url)
-        article.insert(0, span)
         if page.meta != None and 'pdf' in page.meta and page.meta['pdf'] == False:
             # print(page.meta)
             return self.get_path_to_pdf(page.file.dest_path)
@@ -204,8 +201,7 @@ class Generator(object):
         div = self.html.new_tag('div')
         menu = self.html.new_tag('div')
         h4 = self.html.new_tag('h4')
-        urlid = url.split('.')[0]
-        a = self.html.new_tag('a', href='#mkpdf-{}'.format(urlid))
+        a = self.html.new_tag('a', href='#')
         a.insert(0, p.title)
         h4.append(a)
         menu.append(h4)
