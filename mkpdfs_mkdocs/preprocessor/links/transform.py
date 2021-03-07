@@ -4,38 +4,15 @@ from .util import is_doc, normalize_href
 
 # normalize href to #foo/bar/section:id
 def transform_href(href: str, rel_url: str):
-    head, tail = os.path.split(href)
-
-    num_hashtags = tail.count('#')
-
-    if tail.startswith('#'):
-        head, section = os.path.split(rel_url)
-        section = os.path.splitext(section)[0]
-        id = tail[1:]
-    elif num_hashtags == 1:
-        section, ext = tuple(os.path.splitext(tail))
-        id = str.split(ext if len(ext) > 0 else section, '#')[1]
-
-        if head == '..':
-            href = normalize_href(href, rel_url)
-            return '#{}:{}'.format(href, id)
-
-    elif num_hashtags is 0:
-        if not is_doc(href):
-            return href
-
-        href = normalize_href(href, rel_url)
-        return '#{}:'.format(href)
-
-    if head != '':
-        head += '/'
-
-    return '#{}{}:{}'.format(head, section, id)
+    if not is_doc(href):
+        return href
+    if '#' not in href:
+        href += '#'
+    return "#" + normalize_href(href, rel_url).replace("#", ":", 1)
 
 # normalize id to foo/bar/section:id
 def transform_id(id: str, rel_url: str):
-    head, tail = os.path.split(rel_url)
-    section, _ = os.path.splitext(tail)
+    head, section = os.path.split(rel_url)
 
     if len(head) > 0:
         head += '/'
