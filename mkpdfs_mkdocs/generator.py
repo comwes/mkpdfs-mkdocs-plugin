@@ -136,7 +136,7 @@ class Generator(object):
         start_dir), pdf_split[1])
 
     def add_tocs(self):
-        title = self.html.new_tag('h1', id='doc-title')
+        title = self.html.new_tag('h1', id='toc-title')
         title.insert(0, self.config['toc_title'])
         self._toc = self.html.new_tag('article', id='contents')
         self._toc.insert(0, title)
