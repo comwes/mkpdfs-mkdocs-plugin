@@ -194,7 +194,6 @@ class Generator(object):
                 child = self.html.new_tag('div')
                 child.append(stoc)
                 self._toc.append(child)
-
     def _gen_children(self, url, children):
         ul = self.html.new_tag('ul')
         for child in children:
