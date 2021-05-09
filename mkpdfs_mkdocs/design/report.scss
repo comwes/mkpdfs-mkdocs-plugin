@@ -244,6 +244,10 @@ html body {
   }
 }
 
+div.admonition {
+  break-inside: avoid;
+}
+
 h2, h3, h4, h5 {
   margin-bottom: 0.1em;
 }
