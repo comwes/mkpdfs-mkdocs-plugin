@@ -2,9 +2,8 @@ import logging
 import os
 import sys
 from uuid import uuid4
-from timeit import default_timer as timer
 
-from weasyprint import HTML,urls, CSS
+from weasyprint import HTML, urls, CSS
 from bs4 import BeautifulSoup
 from weasyprint.fonts import FontConfiguration
 
@@ -31,7 +30,7 @@ class Generator(object):
         self._toc = None
         self.html = BeautifulSoup('<html><head></head>\
         <body></body></html>',
-        'html.parser')
+                                  'html.parser')
         self.dir = os.path.dirname(os.path.realpath(__file__))
         self.design = os.path.join(self.dir, 'design/report.css')
 
@@ -39,7 +38,7 @@ class Generator(object):
         self.config = local;
         if self.config['design']:
             css_file = os.path.join(os.getcwd(), self.config['design'])
-            if not os.path.isfile(css_file) :
+            if not os.path.isfile(css_file):
                 sys.exit('The file {} specified for design has not \
                 been found.'.format(css_file))
             self.design = css_file
@@ -51,17 +50,17 @@ class Generator(object):
     def write(self):
         if not self.generate:
             self.logger.log(msg='Unable to generate the PDF Version (See Mkpdfs doc)',
-            level=logging.WARNING,)
+                            level=logging.WARNING, )
             return
         self.gen_articles()
         font_config = FontConfiguration()
         self.add_head()
         pdf_path = os.path.join(self.mkdconfig['site_dir'],
-        self.config['output_path'])
+                                self.config['output_path'])
         os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
         html = HTML(string=str(self.html)).write_pdf(pdf_path,
-        font_config=font_config)
-        self.logger.log(msg='The PDF version of the documentation has been generated.', level=logging.INFO,)
+                                                     font_config=font_config)
+        self.logger.log(msg='The PDF version of the documentation has been generated.', level=logging.INFO, )
 
     def add_nav(self, nav):
         self.nav = nav
@@ -73,20 +72,20 @@ class Generator(object):
             print(page.meta)
             exit(1)
             return
-        if page.is_page :
+        if page.is_page:
             self._page_order.append(page.file.url)
         elif page.children:
             uuid = str(uuid4())
             self._page_order.append(uuid)
             title = self.html.new_tag('h1',
-                id='{}-title'.format(uuid),
-                **{'class': 'section_title'}
-            )
+                                      id='{}-title'.format(uuid),
+                                      **{'class': 'section_title'}
+                                      )
             title.append(page.title)
             article = self.html.new_tag('article',
-                id='{}'.format(uuid),
-                **{'class': 'chapter'}
-            )
+                                        id='{}'.format(uuid),
+                                        **{'class': 'chapter'}
+                                        )
             article.append(title)
             self._articles[uuid] = article
             for child in page.children:
@@ -102,7 +101,7 @@ class Generator(object):
         soup = BeautifulSoup(content, 'html.parser')
         url = page.url.split('.')[0]
         article = soup.find('article')
-        if not article :
+        if not article:
             article = self.html.new_tag('article')
             eld = soup.find('div', **{'role': 'main'})
             article.append(eld)
@@ -121,12 +120,12 @@ class Generator(object):
     def add_head(self):
         lines = ['<title>{}</title>'.format(self.title)]
         for key, val in (
-            ("author", self.config['author'] or self.mkdconfig['site_author']),
-            ("description", self.mkdconfig['site_description']),
+                ("author", self.config['author'] or self.mkdconfig['site_author']),
+                ("description", self.mkdconfig['site_description']),
         ):
             if val:
                 lines.append('<meta name="{}" content="{}">'.format(key, val))
-        for css in (self.design, ):
+        for css in (self.design,):
             if css:
                 css_tmpl = '<link rel="stylesheet" href="{}" type="text/css">'
                 lines.append(css_tmpl.format(urls.path2url(css)))
@@ -138,7 +137,7 @@ class Generator(object):
         pdf_split = os.path.split(self.config['output_path'])
         start_dir = os.path.split(start)[0]
         return os.path.join(os.path.relpath(pdf_split[0],
-        start_dir), pdf_split[1])
+                                            start_dir), pdf_split[1])
 
     def add_tocs(self):
         title = self.html.new_tag('h1', id='toc-title')
@@ -147,7 +146,7 @@ class Generator(object):
         self._toc.insert(0, title)
         for n in self.nav:
             if n.is_page and n.meta != None and 'pdf' in n.meta \
-            and n.meta['pdf'] == False:
+                    and n.meta['pdf'] == False:
                 continue
             if hasattr(n, 'url') and is_external(n.url):
                 # Skip toc generation for external links
@@ -155,10 +154,10 @@ class Generator(object):
             h3 = self.html.new_tag('h3')
             h3.insert(0, n.title)
             self._toc.append(h3)
-            if n.is_page :
+            if n.is_page:
                 ptoc = self._gen_toc_page(n.file.url, n.toc)
                 self._toc.append(ptoc)
-            else :
+            else:
                 self._gen_toc_section(n)
         self.html.body.append(self._toc)
 
@@ -170,27 +169,27 @@ class Generator(object):
         a.append(gen_address(self.config))
         self.html.body.append(a)
 
-    def gen_articles (self):
+    def gen_articles(self):
         self.add_cover()
-        if self.config['toc_position'] == 'pre' :
+        if self.config['toc_position'] == 'pre':
             self.add_tocs()
         for url in self._page_order:
             if url in self._articles:
                 self.html.body.append(self._articles[url])
-        if self.config['toc_position'] == 'post' :
+        if self.config['toc_position'] == 'post':
             self.add_tocs()
 
     def get_path_to_pdf(self, start):
         pdf_split = os.path.split(self.config['output_path'])
         start_dir = os.path.split(start)[0] if os.path.split(start)[0] else '.'
         return os.path.join(os.path.relpath(pdf_split[0], start_dir),
-        pdf_split[1])
+                            pdf_split[1])
 
     def _gen_toc_section(self, section):
         if section.children:  # External Links do not have children
             for p in section.children:
-                if p.is_page and p.meta != None and 'pdf' \
-                in p.meta and p.meta['pdf'] == False:
+                if p.is_page and p.meta and 'pdf' \
+                        in p.meta and not p.meta['pdf']:
                     continue
                 if not hasattr(p, 'file'):
                     # Skip external links
@@ -207,7 +206,7 @@ class Generator(object):
             a.insert(0, child.title)
             li = self.html.new_tag('li')
             li.append(a)
-            if child.children :
+            if child.children:
                 sub = self._gen_children(url, child.children)
                 li.append(sub)
             ul.append(li)
@@ -230,11 +229,11 @@ class Generator(object):
                 li.append(a)
                 if child.title == p.title:
                     li = self.html.new_tag('div')
-                if child.children :
+                if child.children:
                     sub = self._gen_children(url, child.children)
                     li.append(sub)
                 ul.append(li)
-            if len(p.toc.items)>0:
+            if len(p.toc.items) > 0:
                 menu.append(ul)
         div.append(menu)
         div = prep_combined(div, self._base_urls[url], url)
@@ -249,7 +248,7 @@ class Generator(object):
             a.append(item.title)
             li.append(a)
             menu.append(li)
-            if item.children :
+            if item.children:
                 child = self._gen_children(url, item.children)
                 menu.append(child)
         div.append(menu)
