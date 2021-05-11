@@ -42,3 +42,6 @@ def gen_address (config):
         span.append(config['copyright'])
         address.append(span)
     return address
+
+def is_external(href: str):
+    return href.startswith('http://') or href.startswith('https://')

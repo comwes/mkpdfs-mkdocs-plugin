@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from weasyprint.fonts import FontConfiguration
 
 from mkpdfs_mkdocs.utils import gen_address
+from .utils import is_external
 from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
 
 log = logging.getLogger(__name__)
@@ -20,6 +21,7 @@ class Generator(object):
         self.design = None
         self.mkdconfig = None
         self.nav = None
+        self.title = None
         self.logger = logging.getLogger('mkdocs.mkpdfs')
         self.generate = True
         self._articles = {}
@@ -52,7 +54,7 @@ class Generator(object):
             return
         self.gen_articles()
         font_config = FontConfiguration()
-        css = self.add_css(font_config);
+        self.add_css(font_config)
         pdf_path = os.path.join(self.mkdconfig['site_dir'],
         self.config['output_path'])
         os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
@@ -63,13 +65,13 @@ class Generator(object):
     def add_nav(self, nav):
         self.nav = nav
         for p in nav:
-            self.addToOrder(p)
+            self.add_to_order(p)
 
-    def addToOrder(self, page):
+    def add_to_order(self, page):
         if page.is_page and page.meta != None and 'pdf' in page.meta and page.meta['pdf'] == False:
             print(page.meta)
             exit(1)
-            return;
+            return
         if page.is_page :
             self._page_order.append(page.file.url)
         elif page.children:
@@ -87,11 +89,9 @@ class Generator(object):
             article.append(title)
             self._articles[uuid] = article
             for child in page.children:
-                self.addToOrder(child)
-
+                self.add_to_order(child)
 
     def remove_from_order(self, item):
-
         return
 
     def add_article(self, content, page, base_url):
@@ -141,7 +141,7 @@ class Generator(object):
             if n.is_page and n.meta != None and 'pdf' in n.meta \
             and n.meta['pdf'] == False:
                 continue
-            if hasattr(n, 'url'):
+            if hasattr(n, 'url') and is_external(n.url):
                 # Skip toc generation for external links
                 continue
             h3 = self.html.new_tag('h3')
@@ -191,6 +191,7 @@ class Generator(object):
                 child = self.html.new_tag('div')
                 child.append(stoc)
                 self._toc.append(child)
+
     def _gen_children(self, url, children):
         ul = self.html.new_tag('ul')
         for child in children:
@@ -203,6 +204,7 @@ class Generator(object):
                 li.append(sub)
             ul.append(li)
         return ul
+
     def _gen_toc_for_section(self, url, p):
         div = self.html.new_tag('div')
         menu = self.html.new_tag('div')
@@ -212,19 +214,20 @@ class Generator(object):
         h4.append(a)
         menu.append(h4)
         ul = self.html.new_tag('ul')
-        for child in p.toc.items:
-            a = self.html.new_tag('a', href=child.url)
-            a.insert(0, child.title)
-            li = self.html.new_tag('li')
-            li.append(a)
-            if child.title == p.title:
-                li = self.html.new_tag('div');
-            if child.children :
-                sub = self._gen_children(url, child.children)
-                li.append(sub)
-            ul.append(li)
-        if len(p.toc.items)>0:
-            menu.append(ul)
+        if p.toc:
+            for child in p.toc.items:
+                a = self.html.new_tag('a', href=child.url)
+                a.insert(0, child.title)
+                li = self.html.new_tag('li')
+                li.append(a)
+                if child.title == p.title:
+                    li = self.html.new_tag('div');
+                if child.children :
+                    sub = self._gen_children(url, child.children)
+                    li.append(sub)
+                ul.append(li)
+            if len(p.toc.items)>0:
+                menu.append(ul)
         div.append(menu)
         div = prep_combined(div, self._base_urls[url], url)
         return div.find('div')
