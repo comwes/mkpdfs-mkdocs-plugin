@@ -21,7 +21,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     python_requires='>=3.4',
-    include_package_data = True,
+    include_package_data=True,
     install_requires=[
         'mkdocs>=0.17',
         'weasyprint>=0.44',

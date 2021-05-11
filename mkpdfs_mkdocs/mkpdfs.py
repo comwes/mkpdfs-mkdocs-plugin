@@ -1,17 +1,12 @@
 import os
-import sys
-from timeit import default_timer as timer
 
 from mkdocs.config import config_options
 from mkdocs.plugins import BasePlugin
-from mkdocs.commands.build import build
 
-from weasyprint import HTML,urls, CSS
-from bs4 import BeautifulSoup
-from weasyprint.fonts import FontConfiguration
-
+from weasyprint import HTML, urls, CSS
 from mkpdfs_mkdocs.generator import Generator
 from mkpdfs_mkdocs.utils import modify_html
+
 
 class Mkpdfs(BasePlugin):
 

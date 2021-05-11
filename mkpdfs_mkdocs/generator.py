@@ -35,7 +35,7 @@ class Generator(object):
         self.design = os.path.join(self.dir, 'design/report.css')
 
     def set_config(self, local, config):
-        self.config = local;
+        self.config = local
         if self.config['design']:
             css_file = os.path.join(os.getcwd(), self.config['design'])
             if not os.path.isfile(css_file):
