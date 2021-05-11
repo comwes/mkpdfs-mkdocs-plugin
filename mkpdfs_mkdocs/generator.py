@@ -182,7 +182,7 @@ class Generator(object):
 
     def get_path_to_pdf(self, start):
         pdf_split = os.path.split(self.config['output_path'])
-        start_dir = os.path.split(start)[0]
+        start_dir = os.path.split(start)[0] if os.path.split(start)[0] else '.'
         return os.path.join(os.path.relpath(pdf_split[0], start_dir),
         pdf_split[1])
 
