@@ -221,7 +221,7 @@ class Generator(object):
                 li = self.html.new_tag('li')
                 li.append(a)
                 if child.title == p.title:
-                    li = self.html.new_tag('div');
+                    li = self.html.new_tag('div')
                 if child.children :
                     sub = self._gen_children(url, child.children)
                     li.append(sub)
