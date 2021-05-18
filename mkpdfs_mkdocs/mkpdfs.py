@@ -28,7 +28,7 @@ class Mkpdfs(BasePlugin):
         self._skip_pdf = True if os.environ.get("SKIP_PDF") else False
         self._logger = logging.getLogger('mkdocs.mkpdfs')
 
-    def on_serve (self, server, config, **kwargs):
+    def on_serve(self, server, config, **kwargs):
         if self._skip_pdf:
             self._logger.info("PDF generation will be skipped: presence of env var SKIP_PDF=1")
         # TODO: Implement watcher when the user is performing design

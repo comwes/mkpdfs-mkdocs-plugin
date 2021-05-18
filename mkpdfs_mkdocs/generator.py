@@ -68,9 +68,7 @@ class Generator(object):
             self.add_to_order(p)
 
     def add_to_order(self, page):
-        if page.is_page and page.meta != None and 'pdf' in page.meta and page.meta['pdf'] == False:
-            print(page.meta)
-            exit(1)
+        if page.is_page and page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             return
         if page.is_page:
             self._page_order.append(page.file.url)
@@ -111,7 +109,7 @@ class Generator(object):
             self.generate = False
             return None
         article = prep_combined(article, base_url, page.file.url)
-        if page.meta != None and 'pdf' in page.meta and page.meta['pdf'] == False:
+        if page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             # print(page.meta)
             return self.get_path_to_pdf(page.file.dest_path)
         self._articles[page.file.url] = article
@@ -145,8 +143,8 @@ class Generator(object):
         self._toc = self.html.new_tag('article', id='contents')
         self._toc.insert(0, title)
         for n in self.nav:
-            if n.is_page and n.meta != None and 'pdf' in n.meta \
-                    and n.meta['pdf'] == False:
+            if n.is_page and n.meta and 'pdf' in n.meta \
+                    and not n.meta['pdf']:
                 continue
             if hasattr(n, 'url') and is_external(n.url):
                 # Skip toc generation for external links
