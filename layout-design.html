@@ -1,0 +1,446 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Comwes" name="author"/>
+<link href="https://comwes.github.io/mkpdfs-mkdocs-plugin/layout-design.html" rel="canonical"/>
+<link href="assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.1, mkdocs-material-7.1.9" name="generator"/>
+<title>Layout customisation - MkPDFs for MkDocs</title>
+<link href="assets/stylesheets/main.ca7ac06f.min.css" rel="stylesheet"/>
+<link href="assets/stylesheets/palette.f1a3b89f.min.css" rel="stylesheet"/>
+<meta content="#2094f3" name="theme-color"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+<link href="stylesheets/extra.css" rel="stylesheet"/>
+</head>
+<body data-md-color-accent="blue-light" data-md-color-primary="blue" data-md-color-scheme="" dir="ltr">
+<script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#customisation">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="MkPDFs for MkDocs" class="md-header__button md-logo" data-md-component="logo" href="index.html" title="MkPDFs for MkDocs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            MkPDFs for MkDocs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Layout customisation
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/comwes/mkpdfs-mkdocs-plugin" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="MkPDFs for MkDocs" class="md-nav__button md-logo" data-md-component="logo" href="index.html" title="MkPDFs for MkDocs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    MkPDFs for MkDocs
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/comwes/mkpdfs-mkdocs-plugin" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="index.html">
+        MkPDFs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="getting-started.html">
+        Getting started
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Layout customisation
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="layout-design.html">
+        Layout customisation
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#customisation">
+    Customisation
+  </a>
+<nav aria-label="Customisation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#external-url-display">
+    External url display
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-css-identifiers">
+    Other CSS identifiers
+  </a>
+<nav aria-label="Other CSS identifiers" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-the-cover">
+    On the cover
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pages-layout">
+    Pages Layout
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#built-layouts">
+    Built Layouts
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#design-sample">
+    Design sample
+  </a>
+<nav aria-label="Design sample" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage">
+    Usage
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#modifications">
+    Modifications
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#build-the-design">
+    Build the design
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#run-and-build">
+    Run and build
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="release-notes.html">
+        Release notes
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#customisation">
+    Customisation
+  </a>
+<nav aria-label="Customisation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#external-url-display">
+    External url display
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#other-css-identifiers">
+    Other CSS identifiers
+  </a>
+<nav aria-label="Other CSS identifiers" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#on-the-cover">
+    On the cover
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pages-layout">
+    Pages Layout
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#built-layouts">
+    Built Layouts
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#design-sample">
+    Design sample
+  </a>
+<nav aria-label="Design sample" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usage">
+    Usage
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#modifications">
+    Modifications
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#build-the-design">
+    Build the design
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#run-and-build">
+    Run and build
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset"><a class="md-content__icon pdf-download-btn" download href="pdf/documentation.pdf" title="Download"><i class="fa fas fa-download"></i><small> PDF</small></a>
+<h1>Layout customisation</h1>
+<p>We have done our best to make sure that theme design will not interfer with the pdf design. They are completely separated to make it possible for you to customise and to avoid layout issues that we've encoutered while using other PDF generation plugins.</p>
+<p>With this plugin you can easily customise the design of your PDF by using CSS.</p>
+<h2 id="customisation">Customisation</h2>
+<p>Lets say you mkdoc schema is as following:</p>
+<div class="codehilite"><pre><span></span><code>.
+├── design
+│   └── style.css
+├── docs
+│   ├── index.md
+├── mkdocs.yml
+</code></pre></div>
+<p>You can customise your PDF layout design by passing a CSS file location to the parameter <code>design</code> like in the folowing example.</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">plugins</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">search</span>
+    <span class="p p-Indicator">-</span> <span class="nt">mkpdfs</span><span class="p">:</span>
+        <span class="nt">design</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">design/style.css</span>
+</code></pre></div>
+<div class="admonition note note">
+<p class="admonition-title">Note</p>
+<p>Currently the plugin only supports the use of one file.</p>
+</div>
+<p>The provided file location, must be relative to your MkDocs project folder.</p>
+<h3 id="external-url-display">External url display</h3>
+<p>It can sometime be interesting to display hidden external links to the file so users can copy-paste them. For that purpose we have added the class <code>external-links</code> to all external urls and you can add this feature by adding to your css file the following code.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="nc">external-link</span><span class="p">::</span><span class="nd">after</span> <span class="p">{</span>
+  <span class="k">content</span><span class="p">:</span> <span class="s2">" ("</span> <span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">)</span> <span class="s2">")"</span><span class="p">;</span>
+  <span class="k">font-style</span><span class="p">:</span> <span class="kc">italic</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="other-css-identifiers">Other CSS identifiers</h3>
+<p>We have also exposed some style, that makes it easier to customise the Table of Contents, the document cover, the document title, the document author, the document company, and the copyright text.</p>
+<h4 id="on-the-cover">On the cover</h4>
+<p>You can use the following css identifiers to modify your cover.</p>
+<ul>
+<li><code>#doc-cover</code>: Id of the cover containers. All elements are inside it.</li>
+<li><code>#doc-title</code>: The title container. You can use this to modify the apparence of the title present on the cover</li>
+<li><code>address</code>: This tag located in <code>#doc-cover</code> contains the author, company and the copyright information when they are available.</li>
+<li><code>p.author</code>: It contains the document author in the <code>#doc-cover</code>.</li>
+<li><code>p.company</code>: It contains the the document company in the <code>#doc-cover</code>.</li>
+<li><code>#copyright</code>: It contains the copyright text. This can be, as an example, added in the footer of each page.</li>
+</ul>
+<h4 id="pages-layout">Pages Layout</h4>
+<p>You can use the <code>@page</code> css to modify page layout. Please find more information at <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@page">MDN</a>.</p>
+<h2 id="built-layouts">Built Layouts</h2>
+<p>Our plan is to provide documentation layouts that can be used directly in your project. These built layouts will be available soon. Meanwhile you can also use the design sample to inspire you.</p>
+<h2 id="design-sample">Design sample</h2>
+<p>We have created a design sample to ease this customisation step. You can find it on <a href="https://github.com/comwes/mkpdfs-design-sample">Github</a>.</p>
+<h3 id="usage">Usage</h3>
+<p>In order to start using the design, a Node.js version of at least 8 is required. First, clone the repository:</p>
+<div class="codehilite"><pre><span></span><code>git clone https://github.com/comwes/mkpdfs-design-sample
+</code></pre></div>
+<p>Next, all dependencies need to be installed, which is done with:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span> mkpdfs-design-sample
+npm install
+</code></pre></div>
+<h3 id="modifications">Modifications</h3>
+<p>Modify <code>scss</code> files as you need. In the <code>report.scss</code> you can modify two parameters to change the color main colors.
+- <code>$bgTextColor</code>: The text color when there's a background.
+- <code>$bgColor</code>: The document title color, background color and the titles colors on pages.</p>
+<h3 id="build-the-design">Build the design</h3>
+<p>To build the design, just run:</p>
+<div class="codehilite"><pre><span></span><code>npm run build
+</code></pre></div>
+<p>or if you want to build a compressed version</p>
+<div class="codehilite"><pre><span></span><code>npm run build-compressed
+</code></pre></div>
+<p>You can now use the built css in your project. In the sample the css file to use is called <code>report.css</code></p>
+<h3 id="run-and-build">Run and build</h3>
+<p>Now add enable MkPDFs plugin and include the design file in 'mkdocs.yml'.</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">plugins</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">search</span>
+    <span class="p p-Indicator">-</span> <span class="nt">mkpdfs</span><span class="p">:</span>
+        <span class="nt">design</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mkpdfs-design-sample/report.css</span>
+</code></pre></div>
+<p>Once the plugin has been enabled, you can now run one of these commands to see the result:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Berve the doc on localhost server</span>
+mkdocs serve
+
+<span class="c1"># Build the documentation</span>
+mkdocs build
+</code></pre></div>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Getting started" class="md-footer__link md-footer__link--prev" href="getting-started.html" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Getting started
+            </div>
+</div>
+</a>
+<a aria-label="Next: Release notes" class="md-footer__link md-footer__link--next" href="release-notes.html" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Release notes
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+<div class="md-footer-copyright__highlight">
+            © 2019 Comwes. CC-BY
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+<script src="assets/javascripts/bundle.82b56eb2.min.js"></script>
+</body>
+</html>
