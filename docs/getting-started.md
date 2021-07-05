@@ -17,6 +17,8 @@ pip --version
 
 > If you have multiple versions of python and python 3 is not your default version, use `pip3` instead of `pip`
 
+You have to also make sure all [requirements](index.md#requirements) are installed. 
+
 Installing and verifying MkDocs is as simple as:
 
 ``` sh
