@@ -21,7 +21,8 @@
     "material-design-color": "^2.3.2",
     "material-shadows": "^3.0.1",
     "modularscale-sass": "^3.0.8",
-    "node-sass": "^4.14.1"
+    "node-sass": "^6.0.1",
+    "trim-newlines": ">=3.0.1"
   },
   "author": {
     "name": "Comwes, Gerry Ntabuhashe",
