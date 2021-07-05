@@ -2,9 +2,10 @@ language: python
 sudo: false
 matrix:
   include:
-  - name: Python 3.6
-    dist: xenial
-    python: 3.6
+  - name: Python 3.8
+    dist: bionic
+    python: 3.8
+    node_js: 14
     env: GEN_DOC=yes
 
 before_install:
