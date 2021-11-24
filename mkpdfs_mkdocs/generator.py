@@ -1,11 +1,15 @@
 import logging
 import os
 import sys
+import weasyprint
 from uuid import uuid4
 
 from weasyprint import HTML, urls, CSS
 from bs4 import BeautifulSoup
-from weasyprint.fonts import FontConfiguration
+if weasyprint.__version__ < '53':
+    from weasyprint.fonts import FontConfiguration
+else:
+    from weasyprint.text.fonts import FontConfiguration
 
 from mkpdfs_mkdocs.utils import gen_address
 from .utils import is_external
