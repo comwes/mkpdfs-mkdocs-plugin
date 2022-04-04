@@ -10,6 +10,9 @@ from weasyprint.fonts import FontConfiguration
 from mkpdfs_mkdocs.utils import gen_address
 from .utils import is_external
 from mkpdfs_mkdocs.preprocessor import get_separate as prep_separate, get_combined as prep_combined
+from mkpdfs_mkdocs.preprocessor import nest_heading_bookmarks
+from mkpdfs_mkdocs.preprocessor import remove_header_links
+from mkpdfs_mkdocs.preprocessor import remove_material_header_icons
 
 log = logging.getLogger(__name__)
 
@@ -26,6 +29,7 @@ class Generator(object):
         self.generate = True
         self._articles = {}
         self._page_order = []
+        self._page_nesting = {}
         self._base_urls = {}
         self._toc = None
         self.html = BeautifulSoup('<html><head></head>\
@@ -67,17 +71,20 @@ class Generator(object):
         for p in nav:
             self.add_to_order(p)
 
-    def add_to_order(self, page):
+    def add_to_order(self, page, level=1):
         if page.is_page and page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             return
         if page.is_page:
+            self._page_nesting[page.file.url] = level - 1
             self._page_order.append(page.file.url)
         elif page.children:
             uuid = str(uuid4())
             self._page_order.append(uuid)
             title = self.html.new_tag('h1',
                                       id='{}-title'.format(uuid),
-                                      **{'class': 'section_title'}
+                                      **{'class': 'section_title',
+                                          # See also nest_heading_bookmarks()
+                                         'style': 'bookmark-level:{}'.format(level)}
                                       )
             title.append(page.title)
             article = self.html.new_tag('article',
@@ -87,7 +94,7 @@ class Generator(object):
             article.append(title)
             self._articles[uuid] = article
             for child in page.children:
-                self.add_to_order(child)
+                self.add_to_order(child, level=level + 1)
 
     def remove_from_order(self, item):
         return
@@ -108,7 +115,13 @@ class Generator(object):
         if not article:
             self.generate = False
             return None
+        if self.mkdconfig['theme'].name == 'material':
+            article = remove_material_header_icons(article)
         article = prep_combined(article, base_url, page.file.url)
+        article = remove_header_links(article)
+        article = nest_heading_bookmarks(
+            article, self._page_nesting.get(page.file.url, 0)
+        )
         if page.meta and 'pdf' in page.meta and not page.meta['pdf']:
             # print(page.meta)
             return self.get_path_to_pdf(page.file.dest_path)
@@ -130,12 +143,6 @@ class Generator(object):
         head = BeautifulSoup('\n'.join(lines), 'html5lib')
         self.html.head.clear()
         self.html.head.insert(0, head)
-
-    def get_path_to_pdf(self, start):
-        pdf_split = os.path.split(self.config['output_path'])
-        start_dir = os.path.split(start)[0]
-        return os.path.join(os.path.relpath(pdf_split[0],
-                                            start_dir), pdf_split[1])
 
     def add_tocs(self):
         title = self.html.new_tag('h1', id='toc-title')
@@ -178,16 +185,20 @@ class Generator(object):
             self.add_tocs()
 
     def get_path_to_pdf(self, start):
-        pdf_split = os.path.split(self.config['output_path'])
-        start_dir = os.path.split(start)[0] if os.path.split(start)[0] else '.'
-        return os.path.join(os.path.relpath(pdf_split[0], start_dir),
-                            pdf_split[1])
+        return os.path.relpath(self.config['output_path'],
+                               os.path.dirname(start))
 
     def _gen_toc_section(self, section):
         if section.children:  # External Links do not have children
             for p in section.children:
                 if p.is_page and p.meta and 'pdf' \
                         in p.meta and not p.meta['pdf']:
+                    continue
+                if p.is_section:
+                    h3 = self.html.new_tag('h3')
+                    h3.insert(0, p.title)
+                    self._toc.append(h3)
+                    self._gen_toc_section(p)
                     continue
                 if not hasattr(p, 'file'):
                     # Skip external links

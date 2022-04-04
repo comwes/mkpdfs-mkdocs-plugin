@@ -6,7 +6,7 @@ from mkdocs.plugins import BasePlugin
 
 from weasyprint import HTML, urls, CSS
 from mkpdfs_mkdocs.generator import Generator
-from mkpdfs_mkdocs.utils import modify_html
+from mkpdfs_mkdocs.utils import modify_html, modify_html_material
 
 log = logging.getLogger(__name__)
 
@@ -27,6 +27,7 @@ class Mkpdfs(BasePlugin):
         self.generator = Generator()
         self._skip_pdf = True if os.environ.get("SKIP_PDF") else False
         self._logger = logging.getLogger('mkdocs.mkpdfs')
+        self.theme = ''
 
     def on_serve(self, server, config, **kwargs):
         if self._skip_pdf:
@@ -42,6 +43,7 @@ class Mkpdfs(BasePlugin):
             return config
         self.config['output_path'] = os.path.join("pdf", "combined.pdf") if not self.config['output_path'] else self.config['output_path']
         self.generator.set_config(self.config, config)
+        self.theme = config['theme'].name
         return config
 
     def on_nav(self, nav, config, **kwargs):
@@ -65,7 +67,10 @@ class Mkpdfs(BasePlugin):
         base_url = urls.path2url(os.path.join(path, filename))
         pdf_url = self.generator.add_article(output_content, page, base_url)
         if self.config['pdf_links'] and pdf_url:
-            output_content = modify_html(output_content,pdf_url)
+            if self.theme == 'material':
+                output_content = modify_html_material(output_content, pdf_url)
+            else:
+                output_content = modify_html(output_content, pdf_url)
         return output_content
 
     def on_post_build(self, config):

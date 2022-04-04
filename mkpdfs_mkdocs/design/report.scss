@@ -4,6 +4,7 @@
 
 $bgColor: #2196f3;
 $bgTextColor: #fff;
+$lightTextColor: #707070;
 
 
 @font-face {
@@ -276,6 +277,9 @@ html body article {
     break-before: right;
     break-after: left;
     page: no-chapter;
+    h2, h3, h4, h5, h6 {
+      bookmark-level: none;
+    }
     h2 {
       font-size: 20pt;
       font-weight: 400;
@@ -333,5 +337,12 @@ html body article {
   }
   p {
     text-align: justify;
+  }
+  blockquote {
+    margin-left: .2cm;
+    padding-left: .2cm;
+    color: $lightTextColor;
+    border-left: .1cm solid;
+    border-color: $lightTextColor;
   }
 }
