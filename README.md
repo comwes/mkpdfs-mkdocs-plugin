@@ -84,6 +84,7 @@ This plugin supports following options to allow you better handle the customisat
 | `output_path` | The file name of the generated PDF, relative to the `site_dir`. By default this location is set to `pdf/combined.pdf`|
 | `pdf_links` | Create link to download the generated PDF to the top of each HTML page. By default this is enabled |
 | `design` |  Relative to your `MkDocs repository`, this option is the location of the CSS file defining the layout of the generated PDF. If this option is not defined the default design will be used. Defining an non existing file will cause the build or serve failure. |
+| `generate_html` |  Save the html from which the PDF is generated to be able to debug it in the browser. Default is False |
 
 ## Contributing
 

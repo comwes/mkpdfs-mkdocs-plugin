@@ -58,14 +58,18 @@ class Generator(object):
         pdf_path = os.path.join(self.mkdconfig['site_dir'],
                                 self.config['output_path'])
         os.makedirs(os.path.dirname(pdf_path), exist_ok=True)
-        f = open(os.path.dirname(pdf_path)+"/pdf.html", "w")
-        f.write(str(self.html))
+
+        if self.config["generate_html"]:
+            html_path = os.path.dirname(pdf_path)+"/pdf.html"
+            f = open(html_path, "w")
+            f.write(str(self.html))
+            self.logger.log(msg=f'The html version of the documentation has been generated in {html_path}', level=logging.INFO, )
+            
         html = HTML(string=str(self.html)).write_pdf(pdf_path,
                                                      font_config=font_config)
-        self.logger.log(msg='The PDF version of the documentation has been generated.', level=logging.INFO, )
+        self.logger.log(msg=f'The PDF version of the documentation has been generated in {pdf_path}.', level=logging.INFO, )
 
     def add_nav(self, nav):
-        print(nav)
         self.nav = nav
         for p in nav:
             self.add_to_order(p)
