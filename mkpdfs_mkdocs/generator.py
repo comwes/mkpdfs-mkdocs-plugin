@@ -159,7 +159,7 @@ class Generator(object):
             h3 = self.html.new_tag('h3')
             h3.insert(0, n.title)
             self._toc.append(h3)
-            if n.is_page:
+            if n.is_page and len(n.toc) > 0:
                 ptoc = self._gen_toc_page(n.file.url, n.toc)
                 self._toc.append(ptoc)
             else:
