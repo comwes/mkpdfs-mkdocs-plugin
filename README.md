@@ -1,6 +1,7 @@
 # MkPDFs for MkDocs [![Build Status](https://travis-ci.com/comwes/mkpdfs-mkdocs-plugin.svg?branch=master)](https://travis-ci.com/comwes/mkpdfs-mkdocs-plugin)
 
 > :bangbang: This is a fork of original comwes/mkpdfs-mkdocs-plugin
+> 
 > :exclamation: There could be many things that are not up-to-date, but at this moment (20.09.2023) this plugin should work.
 
 *It's a MkDocs plugin that export your documentation in a single PDF file*
