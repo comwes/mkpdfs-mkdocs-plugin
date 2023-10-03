@@ -1,6 +1,6 @@
-site_name: MkPDFs for MkDocs
-site_author: Comwes
-site_url: https://comwes.github.io/mkpdfs-mkdocs-plugin/
+site_name: MkPDFs v2 for MkDocs
+site_author: jurgenwigg
+site_url: https://jurgenwigg.github.io/mkpdfs2-mkdocs-plugin/
 extra_css:
   - 'stylesheets/extra.css'
 theme:
@@ -12,11 +12,11 @@ theme:
   palette:
     primary: 'blue'
     accent: 'blue-light'
-repo_url: https://github.com/comwes/mkpdfs-mkdocs-plugin
+repo_url: https://github.com/jurgenwigg/mkpdfs-mkdocs-plugin
 use_directory_urls: false
 edit_uri: ""
 # Copyright
-copyright: '© 2019 Comwes. CC-BY'
+copyright: '© 2023 jurgenwigg. CC-BY'
 nav:
   - 'MkPDFs': 'index.md'
   - 'Getting started': 'getting-started.md'
@@ -33,7 +33,6 @@ markdown_extensions:
 plugins:
   - search
   - mkpdfs:
-      author: Gerry Ntabuhashe
-      company: "Comwes"
+      author: jurgenwigg
       toc_title: Table of contents
       output_path: pdf/documentation.pdf
