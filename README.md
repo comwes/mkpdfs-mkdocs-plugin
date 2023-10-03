@@ -1,4 +1,4 @@
-# MkPDFs for MkDocs [![Build Status](https://travis-ci.com/comwes/mkpdfs-mkdocs-plugin.svg?branch=master)](https://travis-ci.com/comwes/mkpdfs-mkdocs-plugin)
+# MkPDFs for MkDocs 
 
 > :bangbang: This is a fork of original comwes/mkpdfs-mkdocs-plugin
 > 
@@ -6,10 +6,7 @@
 
 *It's a MkDocs plugin that export your documentation in a single PDF file*
 
-[![MkPDFs for MkDocs](https://raw.githubusercontent.com/comwes/mkpdfs-mkdocs-plugin/master/docs/assets/images/mkpdfs.png)][mkpdfsdoc]
-
-  [mkpdfsdoc]: https://mkpdfs.comwes.eu
-
+[![MkPDFs for MkDocs](https://raw.githubusercontent.com/jurgenwigg/mkpdfs2-mkdocs-plugin/master/docs/assets/images/mkpdfs.png)][mkpdfsdoc]
 
 The MkPDFs plugin will export yor documentation in your MkDocs repository as a PDF file using [WeasyPrint](http://weasyprint.org/).
 
@@ -18,12 +15,12 @@ Unlike other plugin where customizing the design of the generated PDF is complic
 What makes this plugin particular, is that:
 
 1. Your documentation is exported as a single PDF file
-1. The order of pages fits the navigation as defined in the MkDocs configuration file
-1. The ability to override the default design to make it fit your needs
-1. The ability to exclude some files from the generated PDF
-1. No layout issues
-1. No conflict with the theme design
-1. Table of contents integrated in the PDF
+2. The order of pages fits the navigation as defined in the MkDocs configuration file
+3. The ability to override the default design to make it fit your needs
+4. The ability to exclude some files from the generated PDF
+5. No layout issues
+6. No conflict with the theme design
+7. Table of contents integrated in the PDF
 
 ## Requirements
 
@@ -43,7 +40,7 @@ The PDF version of the documentation will not be created if the used generated p
 Install the package with `pip`:
 
 ```bash
-pip3 install mkpdfs-mkdocs
+pip3 install mkpdfs2-mkdocs
 ```
 
 Enable the plugin in your `mkdocs.yml` as folowing
@@ -101,7 +98,7 @@ The idea of this plugin has raised while working on a project in the public sect
 - [Terry Zhao][zhaoterryy] the author of the [MkDocs PDF Export Plugin][mkdocs-pdf-export-plugin] the source of our inspiration. We've used some of his code in this project.
 - [Kozea team][kozeateam] for bringing [WeasyPrint](https://github.com/Kozea/WeasyPrint) to us as an open source project. The default design of the generated PDF is based on their work [report Sample](https://github.com/Kozea/WeasyPrint/tree/gh-pages/samples/report).
 - [Martin Donath][squidfunk] the author of [Material for MkDocs][materialmkdoc], some of his css file were used to design the layout of Admonition, Codehilite, Arthmatex, emoji, and more.
-
+- [Gerry Ntabuhashe][comwes] the author of the original mkpdfs plugin.
 
 [weasyprint-linux]: https://weasyprint.readthedocs.io/en/latest/install.html#linux
 [weasyprint-macos]: https://weasyprint.readthedocs.io/en/latest/install.html#macos
